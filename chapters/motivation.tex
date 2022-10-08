@@ -1,0 +1,80 @@
+\chapter{Motivation}
+
+\section{The historical question of Galois theory}
+
+Galois theory is the study of field extensions using symmetry (i.e. group theory). The historical motivating question of this field of study is solving algebraic equations. Because linear equations are trivial, one might think to start by looking at quadratic equations of the form
+\[
+    x^2 + bx + c = 0
+\]
+over a field $F$. It is well-known how to solve such equations using the quadratic equation; in particular, the roots of this equation are
+\[
+    x = \frac{-b \pm \sqrt{b^2 - 4c}}{2a}.
+\]
+This formula expresses the roots in terms of the coefficients $b, c$ using field operations (i.e. $+, -, \times, \div$) and radicals (i.e. $\sqrt{\cdot}$). Because of the division by 2, we require that $\fieldchar{F} \neq 2$ (to avoid division by zero).
+
+Incrementing the degree, one might next consider cubic equations of the form
+\[
+    x^3 + bx^2 + cx + d = 0.
+\]
+Making the substitution $x \mapsto x - a/3$ eliminates the quadratic term in this equation (but introduces the assumption $\fieldchar{F} \neq 3$!) to yield
+\[
+    x^3 + px + q = 0
+\]
+for some $p, q$ which may be expressed in terms of $a, b$ and $c$. Though more complex than in the quadratic case, there is a formula for the solutions to this reduced cubic equation due to Cardano\footnote{Well, technically this is a result due to Tartaglia, c. 16th century. But for various reasons, it wasn't in the interest of a mathematician to publish a result like this at the time!}; in particular,
+\[
+    x = \gamma - \frac{p}{3\gamma},
+    \quad \text{where} \quad
+    \gamma = \sqrt[3]{-\frac{q}{2} + \sqrt{\frac{q^2}{4} + \frac{p^3}{27}}}.
+\]
+Looking at this formula, the formula involves all the same operations as before with the addition of the higher-order radical $\sqrt[3]{\cdot}$. (We also must insist that $\fieldchar{F} \neq 2$ as well.) There is a very good reason for why both $\sqrt{\cdot}$ and $\sqrt[3]{\cdot}$ appear here, but is something which will be investigated later.
+
+Going again, quartic equations have a formula for their solution (though this time we elide the formula, as it is significantly less tractable to give). When we try to go a step beyond to quintic equations, this is where problems start. The 18th century started to bring some answers for why this was such a hard nut to crack, and eventually a resolution in the negative came due to Ruffini and Abel: no quintic formula of the kind discussed previously exists (and nor for any polynomials of higher degree)! To be more precise, this means that the equation
+\[
+    x^5 + ax^4 + bx^3 + cx^2 + dx + e = 0
+\]
+has no solution in terms of $a, b, c, d$ and $e$ by radicals (that is, using field operations and radicals of any order) which applies in full generality. Conceivably, particular quintic equations might be solvable by radicals, even though the general problem can't be solved. Once again though, this turns out to be false!
+
+\begin{example}
+    Consider the equation $x^5 - 6x + 3 = 0$. We shall prove later in the course that this equation is in fact not solvable by radicals.
+\end{example}
+
+\begin{example}
+    Consider now the equation $x^5 + 15x + 12 = 0$. Surprisingly, this equation is solvable by radicals! (Use a CAS to see the exact solutions.)
+\end{example}
+
+The namesake of this course, Galois\footnote{Who had an interesting life to say the least. Nevertheless, he was an incredibly influential mathematician and kicked off a lot of modern algebra.}, showed that in principle, we can determine solvability by radicals for any algebraic equations. More than this, he offered an explanation of why earlier mathematicians had been successful in the case of finding formulae for equations involving polynomials of degree $\leq 4$.
+
+Galois' treatment and point of view in this field differs from the modern point of view we have now. He was concerned with polynomials, while the modern theory is concerned with field extensions. He was also working over $\bb{C}$, while modern theory works over arbitrary fields $F$ (specialising sometimes if necessary).
+
+It should be said that solving equations in this manner is an object of historical significance, but doesn't reflect the way we solve equations in the modern age, which is now mostly via numerical methods. While the original application of Galois theory is therefore outdated, it still has a number of other applications:
+\begin{itemize}
+    \item topology (covering spaces);
+    \item algebraic number theory (splitting of prime ideals);
+    \item differential equations (differential Galois groups).
+\end{itemize}
+
+\section{The modern formulation of Galois theory}
+
+We cast the previous discussion of Galois theory's classic problem of solving algebraic equations in a more modern light.
+
+For the quadratic equation $x^2 + bx + c = 0$ over a field $F$, we saw that the roots lie in the extension $F(\sqrt{b^2 - 4c})$. In other words, the quadratic formula tells us what specific element we must adjoin to $F$ to reach the solutions. Similarly, considering the (reduced) cubic equation $x^3 + px + q = 0$, we saw that to reach the field in which the solutions lie, we must adjoin the elements
+\[
+    \delta = \sqrt{\frac{q^2}{4} + \frac{p^3}{27}}
+    \quad \text{and} \quad
+    \gamma = \sqrt[3]{-\frac{q}{2} + \delta},
+\]
+giving a tower of extensions
+\[
+    F \subseteq F(\delta) \subseteq F(\delta, \gamma) = F(\delta)(\gamma)
+\]
+so that the solutions ultimately lie in the extension $F(\delta, \gamma)$. These observations motivate the following definition.
+
+\begin{definition}
+    A field extension $K/F$ is \emph{radical} if there exists a tower of field extensions
+    \[
+        F = F_0 \subseteq F_1 \subseteq F_2 \subseteq \cdots \subseteq F_n = K
+    \]
+    such that $F_{i + 1} = F_i(\alpha_i)$, where $\alpha_i^{m_i} \in F_i$ and $m_i > 0$. In other words, $K$ is obtained from $F$ by successively adjoining $m_i$-th roots.
+\end{definition}
+
+Now, an algebraic equation $f(x) = 0$ over $F$ is said to be \emph{``solvable by radicals''} if and only if all roots of $f$ lie in some radical extension of $F$. As a modern interpretation of the classical question, we ask the following: given $f \in F[x]$, does there exist a radical extension of $F$ containing roots of $f$?

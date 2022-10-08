@@ -1,0 +1,102 @@
+\chapter{Galois groups}
+
+\section{Definitions}
+
+\begin{definition}
+    Let $K/F$, $K'/F$ be field extensions, and suppose $\sigma: K \to K'$ is a field homomorphism which fixes $F$ pointwise (i.e. $\sigma(\alpha) = \alpha$ for all $\alpha \in F)$. Then $\sigma$ is said to be an $F$-\emph{homomorphism}. If $K = K'$, then $\sigma$ is moreover said to be an \emph{automorphism of} $K/F$.
+\end{definition}
+
+\begin{remark}
+    $F$-homomorphisms are also called homomorphisms over $F$, or homomorphisms that fix $F$.
+\end{remark}
+
+\begin{example}
+    Some examples of automorphisms we have seen in \cref{exmp_field_auts} are also $F$-automorphisms:
+    \begin{enumerate}
+        \item The conjugation map of $\bb{C}$ is an automorphism of $\bb{C}/\bb{R}$.
+        \item The map $\tau$ of $K = \bb{Q}(\sqrt{2}, \sqrt{3})$ is an automorphism of $K/\bb{Q}$ and $K/\bb{Q}(\sqrt{2})$.
+    \end{enumerate}
+\end{example}
+
+\begin{definition}
+    If $K/F$ is any field extension, then
+    \[
+        \gal(K/F) = \{F\text{-automorphisms of } K\}
+    \]
+    is the \emph{Galois group of} $K/F$.
+\end{definition}
+
+\begin{remark}
+    Some authors write $G(K/F)$, $\aut(K/F)$, $\aut_F{K}$ for $\gal(K/F)$. Also, some reserve the notation $\gal(K/F)$ for when $K/F$ is specifically a \emph{Galois extension}, which is a concept we will define later.
+\end{remark}
+
+\begin{proposition}
+    Some basic properties of Galois groups:
+    \begin{enumerate}[label=(\alph*)]
+        \item Galois groups are groups under composition.
+        \item We have $F \subseteq K^G$, where $G = \gal(K/F)$.
+        \item Every $\sigma \in \gal(K/F)$ is a linear map over $F$.
+    \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+    Exercise.
+\end{proof}
+
+\begin{remark}
+    Sometimes it is the case that $F = K^G$, but not in general. A meaningful question to ask in Galois theory is when this exact equality holds.
+\end{remark}
+
+\section{Field automorphisms as permutations of groups}
+
+We first note a nice fact about $F$-homomorphisms: they map roots to roots.
+
+\begin{lemma}
+\label{prop_f_homs_map_roots_to_roots}
+    Let $F$ be a field with extensions $K, K'$ and $\sigma: K \to K'$ an $F$-homomorphism. Moreover, let $f \in F[x]$ and assume $\alpha \in K$ is a root of $F$. Then $\sigma(\alpha) \in K'$ is also a root of $f$.
+\end{lemma}
+
+Before the proof, we look to an example.
+
+\begin{example}
+    Let $F = \bb{R}$, $K = K' = \bb{C}$, and $\sigma$ the conjugation map. If $\alpha \in \bb{C}$ is a root of $f \in F[x]$, then so is $\sigma(\alpha) = \overline{\alpha}$. So we have a result that, once again, seems to generalise a fact about $\bb{C}$ that we already knew.
+\end{example}
+
+\begin{proof}[Proof of \cref{prop_f_homs_map_roots_to_roots}]
+    Write $f(x) = \sum_{k = 1}^{n} a_k x^k$ for suitable $a_k \in F$. Because $\sigma$ is both a ring homomorphism and an $F$-homomorphism, we have
+    \[
+        a_k \sigma(\alpha)^k = \sigma(a_k) \sigma(\alpha^k) = \sigma(a_k \alpha^k)
+    \]
+    for each $k = 1, 2, \ldots, n$. Now,
+    \[
+        f(\sigma(\alpha))
+        = \sum_{k = 1}^{n} \sigma(a_k \alpha^k)
+        = \sigma\left(\sum_{k = 1}^{n} a_k \alpha^k\right)
+        = \sigma(f(\alpha))
+        = \sigma(0)
+        = 0,
+    \]
+    since any ring homomorphism fixes identities.
+\end{proof}
+
+\begin{example}
+\label{exmp_boring_gal_group}
+    Let $G = \gal(\bb{Q}(\alpha)/Q)$, where $\alpha = \sqrt[3]{2}$. We claim that $G = 1$ (i.e. there are no nontrivial automorphisms). To see this, suppose $\sigma \in G$. Then $\alpha$ is a real root of its minimal polynomial $x^3 - 2 \in \bb{Q}[x]$, so by \cref{prop_f_homs_map_roots_to_roots}, $\sigma(\alpha)$ is also a real root of $x^3 - 2$ in $\bb{Q}(\alpha)$. But because the other roots of this polynomial are non-real, it must be that $\sigma(\alpha) = \alpha$. Now take any $\beta \in \bb{Q}(\alpha)$, and write $\beta = u_0 + u_1 \alpha + u_2 \alpha^2$ for appropriate $u_k \in \bb{Q}$. Then because $\sigma$ is a ring homomorphism which fixes $\alpha$, we have
+    \begin{align*}
+        \sigma(\beta)
+        &= \sigma(u_0 + u_1 \alpha + u_2 \alpha^2) \\
+        &= \sigma(u_0) + \sigma(u_1 \alpha) + \sigma(u_2 \alpha^2) \\
+        &= u_0 + u_1 \sigma(\alpha) + u_2 (\sigma(\alpha))^2 \\
+        &= u_0 + u_1 \alpha + u_2 \alpha^2 \\
+        &= \beta,
+    \end{align*}
+    so $\sigma$ fixes all of $\bb{Q}(\alpha)$. The only such automorphism is the identity: the Galois group of this extension is not very interesting at all!
+\end{example}
+
+\begin{example}
+    This example shows that the extension $\bb{Q}(\alpha)/\bb{Q}$ is somehow not ``big'' enough to do Galois theory, in the sense that there aren't enough roots of polynomials contained within.
+\end{example}
+
+\begin{remark}
+    Any $F$-homomorphism $\sigma: F(\alpha_1, \ldots, \alpha_n) \to K$ is completely determined by the images $\sigma(\alpha_i)$, in the sense that any element $\beta \in F(\alpha_1, \ldots, \alpha_n)$ can be represented as a rational function in the generators $\alpha_k$, and similar reasoning as in \cref{exmp_boring_gal_group} allows one to reduce the important parts of the computation of $\sigma(\beta)$ down to whatever the values of $\sigma(\alpha_k)$ happen to be.
+\end{remark}

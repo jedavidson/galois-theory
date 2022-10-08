@@ -1,0 +1,255 @@
+\chapter{Galois correspondence}
+
+In all that follows, let $K/F$ be a finite extension, and write $G = \gal(K/F)$.
+
+\section{Intermediate fields and Galois correspondences}
+
+\begin{definition}
+    An \emph{intermediate field} of $K/F$ is a subfield $L$ of $K$ containing $F$, i.e. $F \subseteq L \subseteq K$.
+\end{definition}
+
+\begin{example}
+    The intermediate fields of $\bb{Q}(\sqrt{2}, \sqrt{3})/\bb{Q}$ are
+    \[
+        \bb{Q}, \quad \bb{Q}(\sqrt{2}, \sqrt{3}), \quad \bb{Q}(\sqrt{2}), \quad \bb{Q}(\sqrt{3}) \quad \text{and} \quad \bb{Q}(\sqrt{6}).
+    \]
+\end{example}
+
+\begin{example}
+    More generally, if $H$ is a subgroup of $G$, then $F \subseteq K^H$, since by definition every $\sigma \in H$ fixes $F$. So $K^H$ is an intermediate field of $K/F$. In the other direction, if $L$ is an intermediate field of $K/F$, then $H = \gal(K/L)$ is a subgroup of $G$, because $H$ is a subgroup of $\aut{K}$ which fixes $L$ (and so in particular, fixes $F$ as well).
+\end{example}
+
+This example describes a kind of correspondence between intermediate fields and subgroups, which we will formalise with the following definition:
+
+\begin{definition}
+    A \emph{Galois correspondence} consists of a pair of maps
+    \[
+        \{\text{intermediate fields } L \text{ of } K/F\}
+        \correspondence
+        \{\text{subgroups } H \text{ of } \gal(K/F)\},
+    \]
+    given explicitly by
+    \[
+        L \stackrel{\phi}{\longmapsto} \gal(K/L) := L \quad \text{and} \quad H \stackrel{\psi}{\longmapsto} K^H := H'.
+    \]
+\end{definition}
+
+\begin{remark}
+    We shall use symbols affixed by $'$ to always indicate images under these two maps. This is not to be confused with the notation for derived groups/commutator subgroups!
+\end{remark}
+
+\begin{proposition}
+    If $L_1 \subseteq L_2$ are intermediate fields of $K/F$, then $L_1' \supseteq L_2'$. Similarly, if $H_1 \subseteq H_2$ are subgroups of $G$, then $H_1' \supseteq H_2'$. In other words, Galois correspondences are inclusion-reversing.
+\end{proposition}
+
+\section{The fundamental theorem of Galois theory}
+
+\begin{theorem}[Fundamental theorem of Galois theory]
+\label{thm_fund_thm_of_gal_thy}
+    If $K/F$ is a finite Galois extension, then the Galois correspondence maps $\phi, \psi$ are inverse bijections.
+   Equivalently, $L'' = L$ and $H'' = H$.
+\end{theorem}
+
+\begin{example}
+\label{exmp_bad_gal_corresp}
+    This is definitely false for non-Galois extensions! Consider, for example, $\bb{Q}(\sqrt[3]{2})/\bb{Q}$. It has two intermediate fields, but the Galois group of this extension was trivial, and hence only has one subgroup.
+\end{example}
+
+\begin{corollary}
+    Galois extensions have finitely-many intermediate fields.
+\end{corollary}
+
+We will prove \cref{thm_fund_thm_of_gal_thy} in stages. The first half of the claim we will prove using the following lemma, which implies that $\phi$ is injective:
+
+\begin{lemma}
+\label{lem_int_field_imp_of_fund_gal_thm}
+    Let $L$ be an intermediate field of a Galois extension $K/F$, and let $H = L' = \gal(K/L)$. Then $K/L$ is also Galois, and moreover $L = L'' = H'$.
+\end{lemma}
+
+\begin{proof}
+    Since $K/F$ is Galois, $K$ is the splitting field of some separable polynomial $f$ over $F$, and hence also the splitting field for $f$ over $L$ (or indeed any subfield of $K$). So $K/L$ (and moreover $K/L''$) is Galois. Next, observe that $L \subseteq L''$, since $L$ is fixed by $H$ by definition, so it is sufficient to prove that $[K : L''] \geq [K : L]$. Once again by definition, $L' \subseteq \gal(K/L'')$, so by \cref{cor_card_of_gal_ext_gal_grp}, we have
+    \[
+        [K : L''] = |\gal(K/L'')| \geq |H| = |\gal(K/L)| = [K : L].
+    \]
+    Thus $L = L''$.
+\end{proof}
+
+\begin{remark}
+    This can fail if $K/F$ is not Galois: in \cref{exmp_bad_gal_corresp}, the intermediate field $L = \bb{Q}$ yields $L' = 1$ and $L'' = K \neq L$. (The problem is that there aren't enough fields to make $\phi$ injective.)
+\end{remark}
+
+\begin{corollary}
+    If $K/F$ is Galois with Galois group $G$, then $F = K^G$. That is, the only elements fixed by all automorphisms of $K/F$ are those in the base field $F$.
+\end{corollary}
+
+\begin{proof}
+    Apply \cref{lem_int_field_imp_of_fund_gal_thm} with $L = F$.
+\end{proof}
+
+\begin{example}
+    Consider the extension in \cref{exmp_gal_grp_of_cbrt_2}, which is Galois and has Galois group $G \cong S_3$. The nontrivial subgroups of $G$ are cyclic of order 2 or 3 by Lagrange's theorem, giving a Hasse diagram\footnote{Because the Galois correspondence is inclusion-reversing, the lines are directed downwards, so that, for example, $1 \leq \gen{(123}$.} of subgroups
+    \begin{figure}[h]
+    \captionsetup{justification=centering}
+        \[
+            \begin{tikzcd}
+            	&&& 1 \\
+            	\\
+            	{\langle (123) \rangle} && {\langle (12) \rangle} && {\langle (13) \rangle} && {\langle (23) \rangle} \\
+            	\\
+            	&&& G
+            	\arrow["3", no head, from=3-1, to=1-4]
+            	\arrow["2", no head, from=3-3, to=1-4]
+            	\arrow["2", no head, from=3-5, to=1-4]
+            	\arrow["2", no head, from=3-7, to=1-4]
+            	\arrow["2", no head, from=5-4, to=3-1]
+            	\arrow["3", no head, from=5-4, to=3-3]
+            	\arrow["3", no head, from=5-4, to=3-5]
+            	\arrow["3", no head, from=5-4, to=3-7]
+            \end{tikzcd}
+        \]
+    \end{figure}
+    
+    \newpage
+
+    By correspondence, the Hasse diagram\footnote{The lines in this diagram are directed upwards as usual.} of intermediate fields is
+    \begin{figure}[h]
+        \[
+            \begin{tikzcd}
+            	&&& K \\
+            	\\
+            	{\bb{Q}(\omega)} && {\bb{Q}(\omega^2 \alpha)} && {\bb{Q}(\omega \alpha)} && {\bb{Q}(\alpha)} \\
+            	\\
+            	&&& \bb{Q}
+            	\arrow["3", no head, from=3-1, to=1-4]
+            	\arrow["2", no head, from=3-3, to=1-4]
+            	\arrow["2", no head, from=3-5, to=1-4]
+            	\arrow["2", no head, from=3-7, to=1-4]
+            	\arrow["2", no head, from=5-4, to=3-1]
+            	\arrow["3", no head, from=5-4, to=3-3]
+            	\arrow["3", no head, from=5-4, to=3-5]
+            	\arrow["3", no head, from=5-4, to=3-7]
+            \end{tikzcd}
+        \]
+    \end{figure}
+    
+    As an example, let us check that $K^{\gen{(23)}} = \bb{Q}(\alpha)$. The subgroup $\gen{(23)}$ certainly fixes $\bb{Q}(\alpha)$, so $\bb{Q}(\alpha) \subseteq K^{\gen{(23)}}$. Now $K/\bb{Q}(\alpha)$ is an extension of prime degree 2, so either $K^{\gen{(23)}} = \bb{Q}(\alpha)$ or $K^{\gen{(23)}} = K$. The latter cannot be true, since $(23)$ does not fix $\omega \alpha$, and so it must be that $K^{\gen{(23)}} = \bb{Q}(\alpha)$. So by \cref{lem_int_field_imp_of_fund_gal_thm}, we have identified all of the nontrivial intermediate fields of $K/\bb{Q}$, which was unclear at first.
+\end{example}
+
+\begin{example}
+    Consider now the \emph{biquadratic extension} in \cref{exmp_gal_grp_of_biquadratic_ext} with Galois group $G = \gen{\sigma, \tau} \cong \bb{Z}_2 \times \bb{Z}_2$. The Hasse diagram of subgroups, and their corresponding intermediate fields, are thus
+    \begin{figure}[h]
+        \[
+            \begin{tikzcd}
+            	& 1 &&& {\mathbb{Q}(\sqrt{2}, \sqrt{3})} \\
+            	\\
+            	{\langle \sigma \rangle} & {\langle \tau \rangle} & {\langle \sigma\tau \rangle} & {\mathbb{Q}(\sqrt{3})} & {\mathbb{Q}(\sqrt{2})} & {\mathbb{Q}(\sqrt{6})} \\
+            	\\
+            	& G &&& {\mathbb{Q}}
+            	\arrow["2"', no head, from=1-2, to=3-2]
+            	\arrow["2"', no head, from=3-2, to=5-2]
+            	\arrow["2"', no head, from=1-2, to=3-1]
+            	\arrow["2", no head, from=1-2, to=3-3]
+            	\arrow["2"', no head, from=3-1, to=5-2]
+            	\arrow["2", no head, from=3-3, to=5-2]
+            	\arrow["2"', no head, from=1-5, to=3-4]
+            	\arrow["2"', no head, from=1-5, to=3-5]
+            	\arrow["2", no head, from=1-5, to=3-6]
+            	\arrow["2"', no head, from=3-4, to=5-5]
+            	\arrow["2"', no head, from=3-5, to=5-5]
+            	\arrow["2", no head, from=3-6, to=5-5]
+            \end{tikzcd}
+        \]
+    \end{figure}
+\end{example}
+
+Before continuing on to prove the remaining part of \cref{thm_fund_thm_of_gal_thy}, we state and prove a necessary lemma and its corollaries.
+
+\begin{lemma}[Artin]
+\label{lem_artin}
+    Let $K$ be a field and $H$ a finite group of automorphisms of $K$. Then $[K : K^H] \leq |H|$.
+\end{lemma}
+
+\begin{proof}
+    Write $H = \{\sigma_1, \sigma_2, \ldots, \sigma_n\}$, where $\sigma_1 = \id_K$. Suppose toward a contradiction that $[K : K^H] > |H|$. This implies that $K$ is a $K^H$-vector space of dimension at least $n + 1$, so we can find $\alpha_1, \alpha_2, \ldots, \alpha_{n + 1} \in K$ which are linearly independent over $K^H$. Consider the system of linear equations
+    \[
+        A \bm{x} =
+        \begin{pmatrix}
+            \sigma_1(\alpha_1) & \sigma_1(\alpha_2) & \ldots & \sigma_1(\alpha_{n + 1}) \\
+            \sigma_2(\alpha_1) & \sigma_2(\alpha_2) & \ldots & \sigma_2(\alpha_{n + 1}) \\
+            \vdots & \vdots & \ddots & \vdots \\
+            \sigma_n(\alpha_1) & \sigma_n(\alpha_2) & \ldots & \sigma_n(\alpha_{n + 1}) \\
+        \end{pmatrix}
+        \begin{pmatrix}
+            x_1 \\ x_2 \\ \vdots \\ x_{n + 1}
+        \end{pmatrix}
+        = \bm{0}
+    \]
+    over $K$. Since this system has more equations than variables, it must have a nonzero solution $\bm{x} \in K^{n + 1}$. Choose such a solution with the maximal possible number of zero components. We may assume that $x_1 = 1$ by permuting the $\alpha_k$'s and dividing each component of $\bm{x}$ by $x_1$ if necessary. Since $\sigma_1 = \id_K$, the first equation in the system is
+    \[
+        \alpha_1 + x_2 \alpha_2 + \ldots + x_{n + 1} \alpha_{n + 1} = 0,
+    \]
+    and by assumption of the linear independence of the $\alpha_k$'s, it cannot be the case that $x_k \in K^H$ for all $k$. Once again, by permuting $\alpha_2, \ldots, \alpha_{n + 1}$ if necessary, we may assume that $x_2 \not\in K^H$, so that there exists some $\sigma \in H$ with $\sigma(x_2) \neq x_2$. Applying this map to the $k$th equation in the system, we get
+    \[
+        (\sigma \sigma_k)(\alpha_1) \sigma(x_1) + (\sigma \sigma_k)(\alpha_2) \sigma(x_2) + \ldots + (\sigma \sigma_k)(\alpha_{n + 1}) \sigma(x_{n + 1}) = 0.
+    \]
+    Because $\sigma \sigma_k$ is another element of $H$, applying the map to the entire system simply has the effect of permuting the rows of $A$, so we have $A(\sigma \bm{x}) = \bm{0}$, which implies $\bm{y} = \bm{x} - \sigma(\bm{x})$ is also a solution to this system. In particular, $y_1 = 0$, $y_2 \neq 0$ and $y_k = 0$ if $x_k = 0$, so $\bm{y}$ is a nontrivial solution with more zeroes than $\bm{x}$, a contradiction. So $[K : K^H] \leq |H|$.
+\end{proof}
+
+\begin{corollary}
+\label{cor_fixed_field_ext_is_gal}
+    $K/K^H$ is a finite Galois extension.
+\end{corollary}
+
+\begin{proof}
+    Finiteness follows by \cref{lem_artin}, so let $\{\alpha_1, \alpha_2, \ldots \alpha_n\}$ be a $K^H$-basis for $K$. Each $\alpha_i$ has minimal polynomial $p_i \in K^H[x]$, and by \cref{thm_aut_min_polys}, we can write
+    \[
+        p_i(x) = \prod_{\beta} (x - \beta),
+    \]
+    where $\beta$ ranges over the orbits of $\alpha_i$ under $H$. So $\alpha_i$ is separable (as $p_i$ is irreducible and has distinct roots), and $K$ is the splitting field of the polynomial
+    \[
+        p(x) = p_1(x) p_2(x) \ldots p_n(x),
+    \]
+    which is also separable. Thus, $K/K^H$ is Galois.
+\end{proof}
+
+\begin{corollary}
+\label{cor_subgroup_imp_of_fund_gal_thm}
+    We have $\gal(K/K^H) = H$, and $[K : K^H] = |H|$.
+\end{corollary}
+
+\begin{proof}
+    Clearly $H \subseteq \gal(K/K^H)$, so $|H| \leq |\gal(K/K^H)|$. Since $K/K^H$ is Galois,
+    \[
+        |\gal(K/K^H)| = [K : K^H] \leq |H|
+    \]
+    by \cref{lem_artin}, which implies that $H = \gal(K/K^H)$. 
+\end{proof}
+
+We can now give the proof of the fundamental theorem.
+
+\begin{proof}[Proof of \cref{thm_fund_thm_of_gal_thy}]
+    We already have $L = L''$ by \cref{lem_int_field_imp_of_fund_gal_thm}, and now
+    \[
+        H'' = \gal(K/H') = \gal(K/K^H) = H
+    \]
+    by \cref{cor_subgroup_imp_of_fund_gal_thm}.
+\end{proof}
+
+\begin{example}
+    Let $K = \bb{C}(x)$, and consider the map $\sigma : f(x) \longmapsto f(ix)$. Then $\sigma(x^4) = (ix)^4 = x^4$, so $\bb{C}(x^4) \subseteq K^\sigma$. Also, $\sigma^2(x) = -x$ and $\sigma^4(x) = x$. So $\sigma$ has order 4, which is to say that $G = \gen{\sigma}$ is a cyclic group of automorphisms of $K$ with order 4. So $K/K^H$ is Galois with degree 4, and in fact $K^G = \bb{C}(x^4)$. This gives us the Galois correspondence
+    \begin{figure}[h]
+        \[
+            \begin{tikzcd}
+            	1 && {\mathbb{C}(x)} \\
+            	\\
+            	{\langle \sigma^2 \rangle} && {\mathbb{C}(x^2)} \\
+            	\\
+            	G && {\mathbb{C}(x^4)}
+            	\arrow["2", no head, from=1-1, to=3-1]
+            	\arrow["2", no head, from=3-1, to=5-1]
+            	\arrow["2", no head, from=1-3, to=3-3]
+            	\arrow["2", no head, from=3-3, to=5-3]
+            \end{tikzcd}
+        \]
+    \end{figure}
+\end{example}

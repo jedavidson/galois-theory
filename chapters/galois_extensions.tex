@@ -1,0 +1,160 @@
+\chapter{Galois extensions}
+
+Some field extensions are less well-behaved than others. The goal of this chapter is to identify a class of extensions which is ``well-behaved'' enough for Galois theory: so-called \emph{Galois extensions}.
+
+\begin{example}
+\label{exmp_non_gal_exts}
+    It's instructive to look at some field extensions that, from the point of view of Galois theory, are deficient:
+    \begin{enumerate}
+        \item We have remarked that as a consequence of $\bb{Q}(\sqrt[3]{2})/\bb{Q}$ not having ``enough'' roots of $x^3 - 2$, its Galois group was trivial. This suggests that field extensions that are also splitting fields of some polynomial may be desirable.
+        \item Take $F = \bb{F}_p(t)$, the function field in $t$ over $\bb{F}_p$, and consider adjoining a $p$th root of $t$ to obtain the extension $K = F(t^{1/p})$. The minimal polynomial of $t^{1/p}$ is the (irreducible) polynomial $x^p - t \in F[x]$. But in $K[x]$, 
+        \[
+            x^p - t = \left(x - t^{1/p}\right)^p,
+        \]
+        since in characteristic $p$, $(a + b)^p = a^p + b^p$. So while this minimal polynomial is irreducible over $F$, it has a single root with multiplicity in $K$, and once again $\gal(K/F)$ is trivial (because any automorphism of $K/F$ maps roots to roots, so it must map $t^{1/p}$ to itself). This suggests that factoring into distinct linear factors might be desirable too. (Note that this phenomenon is impossible in fields of characteristic zero!)
+    \end{enumerate}
+\end{example}
+
+\section{Algebraic differentiation}
+
+\begin{definition}
+    Let $F$ be a field. Let $f \in F[x]$, say
+    \[
+        f(x) = \sum_{k = 0}^{n} a_k x^k
+    \]
+    with $a_k \in F$. We define the \emph{formal derivative of $f$} to be the polynomial
+    \[
+        f'(x) = \sum_{k = 1}^{n} k a_k x^{k - 1} \in F[x].
+    \]
+\end{definition}
+
+\begin{remark}
+    Alternatively, with $R = F[x, h]/\gen{h^2}$, then we can equivalently define $f'$ to be the unique polynomial such that $f(x + h) - f(x) = f'(x)h$ in $R$.
+\end{remark}
+
+\begin{example}
+    If $F = \bb{F}_3$ and $f(x) = x^2 + 1 \in F[x]$, then the formal derivative of $f$ is $f'(x) = 2x$, but if instead $f(x) = x^3 + 1$, we get $f'(x) = 3x^2 = 0$!
+\end{example}
+
+\begin{proposition}
+\label{prop_derivative}
+    The following usual properties hold for formal derivatives:
+    \begin{enumerate}[label=(\alph*)]
+        \item $(f + g)' = f' + g'$, $(\lambda f)' = \lambda f'$ and $(fg)' = f'g + fg'$ for $f, g \in F[x]$ and $\lambda \in F$.
+        \item $f \in F[x]$ has a multiple root at $\alpha$ if and only if $f(\alpha) = f'(\alpha) = 0$.
+    \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+    Exercise.
+\end{proof}
+
+\section{Separability}
+
+We make precise the ``no repeated roots'' property mentioned in \cref{exmp_non_gal_exts}.
+
+\begin{proposition}
+\label{prop_separability_conditions}
+    Let $f \in F[x]$ be irreducible, and $L$ the splitting field for $f$ over $F$. Then the following are equivalent:
+    \begin{enumerate}[label=(\alph*)]
+        \item $f$ factors into \emph{distinct} linear factors over $L$.
+        \item $f'$ is not the zero polynomial in $F[x]$.
+        \item If $\alpha$ is a root of $f$ (in some suitable field extension), then
+        \[
+            \#. \text{ of field homomorphisms } F(\alpha) \to L = [F(\alpha) : F] = \deg{f}.
+        \]
+    \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+    Recall that any $\sigma: F(\alpha) \to L$ is determined by $\sigma(\alpha)$, which implies
+    \[
+        \#. \text{ of field homomorphisms } F(\alpha) \to L
+        = \#. \text{ of roots of } f \text{ in } L
+        = \deg{f},
+    \]
+    so (a) and (c) are equivalent.
+    
+    If (a) holds, then $f$ has no multiple roots. If it was the case that $f'$ was zero, then for any root $\alpha$ of $f$ we would have $f'(\alpha) = 0$, which contradicts \cref{prop_derivative}, so (b) must also hold.
+    
+    Finally, if (b) holds, then $f'$ is not zero. Now $\gcd(f, f') = 1$, because $f$ is irreducible and $f'$ is of strictly lesser degree than $f$, so $af + bf' = 1$ for some $a, b \in F[x]$. Substituting $x = \alpha$, we get
+    \[
+        a(\alpha)f(\alpha) + b(\alpha)f'(\alpha) = 1
+        \quad \implies \quad
+        b(\alpha)f'(\alpha) = 1,
+    \]
+    and it is clear that we cannot have $f'(\alpha) = 0$, as otherwise $0 = 1$. But this is enough to say that $f$ does not have multiple roots by \cref{prop_derivative}, showing that (a) holds.
+\end{proof}
+
+\begin{definition}
+\label{def_sep_for_irreducibles}
+    If any of the conditions in \cref{prop_separability_conditions} hold, we say that the polynomial $f$ and the element $\alpha$ are \emph{separable} (otherwise, \emph{inseparable}).
+\end{definition}
+
+\begin{example}
+    We now see $f(x) = x^p - t$ over $F_p(t)$ is inseparable as it has repeated roots, but that $x^2 + 1$ over $\bb{F}_3$ is separable.
+\end{example}
+
+\begin{definition}
+    A field extension $K/F$ is \emph{separable} if it is generated by separable elements over $F$. A (not necessarily irreducible) polynomial $f \in F[x]$ is \emph{separable} if its irreducible factors are separable in the sense of \cref{def_sep_for_irreducibles}.
+\end{definition}
+
+\begin{example}
+    Be cautious with this definition: $f(x) = (x - 1)^2 \in \bb{F}_3[x]$ is separable, because the irreducible factors $x - 1$ are separable!
+\end{example}
+
+A corollary of the above explains why extensions of $\bb{Q}$, for example, naturally meet the definition of separability:
+
+\begin{corollary}
+    If $\fieldchar{F} = 0$, then all extensions of $F$ are separable.
+\end{corollary}
+
+\begin{proof}
+    Follows from the fact that the only polynomials for which the formal derivative vanishes over such fields are the constant polynomials.
+\end{proof}
+
+\section{Normal and Galois extensions}
+
+The property that the first extension lacks in \cref{exmp_non_gal_exts} is \emph{normality}.
+
+\begin{definition}
+    A field extension $K/F$ is said to be \emph{normal} if $K$ is the splitting field of some polynomial $f \in F[x]$.
+\end{definition}
+
+\begin{remark}
+    This definition is technically wrong for infinite extensions, but in this course we will deal primarily in finite extensions (for which it is valid).
+\end{remark}
+
+\begin{definition}
+    A normal field extension $K/F$ is \emph{Galois} if, in particular, it is the splitting field of some separable polynomial over $F$.
+\end{definition}
+
+\begin{example}
+\label{exmp_gal_ext}
+    The extension in \cref{exmp_gal_grp_of_cbrt_2} is Galois, because it is the splitting field of $x^3 - 2$, which is separable over $\bb{Q}$.
+\end{example}
+
+\begin{theorem}
+    Let $\sigma: F \to F'$ be a field homomorphism, and $f \in F[x]$ a separable polynomial. Then if $K, K'$ are splitting fields of $f, \sigma f$ respectively, there are exactly $[K : F]$ field homomorphisms $\sigma_K: K \to K'$ extending $\sigma$.
+\end{theorem}
+
+\begin{proof}
+    We proceed by induction on $n = [K : F]$. The base case $n = 1$ is trivial, so suppose $n > 1$. Then $f$ has an irreducible factor $g \in F[x]$ of degree $\geq 2$. Fix a root $\alpha \in K$ of $g$, and let $\alpha' \in K'$ be a root of $\sigma g$. Then $K, K'$ are splitting fields for $f$ and $\sigma g$ over $F(\alpha)$ and $F'(\alpha')$ respectively, and by \cref{prop_field_isom_lifts_to_root_isom} there is a unique extension of $\sigma$ to $\widetilde{\sigma}: F(\alpha) \to F'(\alpha')$. Applying induction to the extension $K/F(\alpha)$ of degree $< n$, we get
+    \[
+        \#. \text{ extensions of } \widetilde{\sigma} \text{ to } \hat{\sigma}: K \to K' = [K : F(\alpha)],
+    \]
+    and so given that there are $[F(\alpha) : F]$ homomorphisms $\widetilde{\sigma}$ to begin with (each coinciding with a choice of $\alpha'$), we get
+    \[
+        \#. \text{ field homomorphisms } K \to K' = [K : F(\alpha)] \cdot [F(\alpha) : F] = [K : F],
+    \]
+    as claimed.
+\end{proof}
+
+\begin{corollary}
+\label{cor_card_of_gal_ext_gal_grp}
+    Applied to $\sigma = \id_{F}$, there are exactly $[K : F]$ automorphisms of $K/F$. In other words, if $K/F$ is Galois, then $|\gal(K/F)| = [K : F]$.
+\end{corollary}
+
+\begin{example}
+    We gave a non-trivial argument in \cref{exmp_gal_grp_of_cbrt_2} that the Galois group $G$ of $\bb{Q}(\sqrt[3]{2}, e^{2\pi i/3})/\bb{Q}$ is of order 6 (i.e. isomorphic to $S_3$). \cref{cor_card_of_gal_ext_gal_grp} gives us a much simpler alternative argument: this extension is Galois of degree 6, so $G$ is (isomorphic to) a subgroup of $S_3$ with order 6, i.e. $G \cong S_3$.
+\end{example}
