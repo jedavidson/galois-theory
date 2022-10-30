@@ -75,7 +75,7 @@ We will prove \cref{thm_fund_thm_of_gal_thy} in stages. The first half of the cl
 \end{proof}
 
 \begin{remark}
-    This can fail if $K/F$ is not Galois: in \cref{exmp_bad_gal_corresp}, the intermediate field $L = \bb{Q}$ yields $L' = 1$ and $L'' = K \neq L$. (The problem is that there aren't enough fields to make $\phi$ injective.)
+    This can fail if $K/F$ is not Galois: in \cref{exmp_bad_gal_corresp}, the intermediate field $L = \bb{Q}$ yields $L' = 1$ and $L'' = K \neq L$. (The problem is that there aren't enough subgroups to make $\phi$ injective.)
 \end{remark}
 
 \begin{corollary}
@@ -236,7 +236,7 @@ We can now give the proof of the fundamental theorem.
 \end{proof}
 
 \begin{example}
-    Let $K = \bb{C}(x)$, and consider the map $\sigma : f(x) \longmapsto f(ix)$. Then $\sigma(x^4) = (ix)^4 = x^4$, so $\bb{C}(x^4) \subseteq K^\sigma$. Also, $\sigma^2(x) = -x$ and $\sigma^4(x) = x$. So $\sigma$ has order 4, which is to say that $G = \gen{\sigma}$ is a cyclic group of automorphisms of $K$ with order 4. So $K/K^H$ is Galois with degree 4, and in fact $K^G = \bb{C}(x^4)$. This gives us the Galois correspondence
+    Let $K = \bb{C}(x)$, and consider the map $\sigma : f(x) \longmapsto f(ix)$. Then $\sigma(x^4) = (ix)^4 = x^4$, so $\bb{C}(x^4) \subseteq K^\sigma$. Also, $\sigma^2(x) = -x$ and $\sigma^4(x) = x$. So $\sigma$ has order 4, which is to say that $G = \gen{\sigma}$ is a cyclic group of automorphisms of $K$ with order 4. So $K/K^G$ is Galois with degree 4, and in fact $K^G = \bb{C}(x^4)$. This gives us the Galois correspondence
     \begin{figure}[h]
         \[
             \begin{tikzcd}
