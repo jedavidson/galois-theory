@@ -1,3 +1,239 @@
 \chapter{Ruler and compass constructions}
 
+Mathematics during the time of ancient Greece wasn't nearly as rich as it is today. However, this didn't stop mathematicians from investigating certain puzzles. For example, given an angle, is it possible to trisect it using only a ruler and compass? This was unresolved by the Greeks, though today we know it to be impossible, as seen by an algebraic argument. The aim of this section is to look at the involved algebraic machinery in more detail.
 
+\section{Quadratic towers of extensions}
+
+\begin{definition}
+    Let $K/F$ be a field extension. A tower of extensions
+    \[
+        F = F_0 \subseteq F_1 \subseteq F_2 \subseteq \cdots \subseteq F_n = K
+    \]
+    is said to be \emph{quadratic} if $[F_{i + 1} : F_i] = 2$ for all $i$.
+\end{definition}
+
+\begin{example}
+    The tower $\bb{Q} \subseteq \bb{Q}(\sqrt{3}) \subseteq \bb{Q}\left(\sqrt{5 - \sqrt{3}}\right)$ is quadratic.
+\end{example}
+
+\begin{remark}
+    If $\fieldchar{F} \neq 2$, then $F_{i + 1} = F_i(\alpha_i)$ for some $\alpha_i$ where $\alpha_i^2 \in F_i$. To see this, one can use the quadratic formula.
+\end{remark}
+
+\section{Constructibility}
+
+\begin{definition}
+   The number $z \in \bb{C}$ is \emph{constructible} if it lies in one of the sets $P_i$ obtained by the following procedure:
+    \begin{enumerate}
+        \item Initialise a set of points $P_0 = \{0, 1\}$, and start with an initially empty set of lines and circles $LC_0 = \varnothing$.
+
+        \item Identify all
+        \begin{enumerate}
+            \item lines passing through two points in $P_i$, and
+            \item circles with centre in $P_i$ and radius equal to the distance between two points in $P_i$.
+        \end{enumerate}
+        Form $LC_{i + 1}$ by adding these new circles and lines to $LC_i$.
+
+        \item Extend $P_i$ to $P_{i + 1}$ by including all of the points of intersection of the new lines and circles with the existing lines and circles in the previous step.
+
+        \item Repeat starting from step 2.
+    \end{enumerate}
+\end{definition}
+
+This process is unwieldy to use as a practical check for constructibility. The next theorem offers a more palatable characterisation:
+
+\begin{theorem}
+\label{thm_constructible_iff_in_quadratic_tower}
+    The number $z \in \bb{C}$ is constructible if and only if $z \in K$ for some $K$ contained in a quadratic tower over $\bb{Q}$.
+\end{theorem}
+
+\begin{proof}
+    This is quite involved. To establish the $\Rightarrow$ direction, one must show that any constructible number can be obtained by solving equations, and for the $\Leftarrow$ direction, one must show that the set of constructible numbers is closed under field operations and radicals. See e.g., Stewart for full details.
+\end{proof}
+
+One geometric question we could ask is ``for what $n$ can we construct a regular $n$-gon using a ruler and compass?'' Clearly for $n = 3, 4$ this is possible, and it was known to the Greeks that the regular pentagon was constructible.
+
+In general, constructing the $n$-gon is equivalent\footnote{in the if and only if sense} to constructing $\zeta_n = e^{2 \pi i/n}$, and using \cref{thm_constructible_iff_in_quadratic_tower}, we can further refine the problem to identifying for which $n$ does $e^{2 \pi i/n}$ lie in a quadratic tower of $\bb{Q}$. For $n = 3, 4$ this is once again clear, as their minimal polynomials are quadratics. Seeing that it holds for $n = 5$ is already tricky: however, it turns out that
+\[
+    \zeta_5 - \zeta_5^2 - \zeta_5^3 + \zeta_5^4 = \sqrt{5},
+\]
+and the required quadratic tower is $\bb{Q} \subseteq \bb{Q}(\sqrt{5}) \subseteq \bb{Q}(\zeta_5)$. The case $n = 6$ is also clear, as its minimal polynomial is once again quadratic, but $n = 7$ is of note: its minimal polynomial is $x^6 + \ldots + x + 1$, which it turns out is irreducible over $\bb{Q}$, so $[\bb{Q}(\zeta_7) : \bb{Q}] = 6$. This is enough to show that it is not contained in a quadratic tower, and hence not constructible: if it was and there was a quadratic tower of $n$ fields $F_k$, we would have
+\[
+    2^n = [F_n : \bb{Q}] = [F_n : \bb{Q}(\zeta_7)] \cdot [\bb{Q}(\zeta_7) : \bb{Q}],
+\]
+which is impossible since $6 \nmid 2^n$. In other words, the regular heptagon is not constructible using a ruler and compass!
+
+\section{An aside: some facts from number theory}
+
+\begin{definition}
+   The \emph{Euler totient function}, denoted $\varphi(m)$, is defined to be the number of integers $0 \leq k < m$ for which $\gcd(m, k) = 1$.
+\end{definition}
+
+\begin{proposition}
+    Some facts related to relative primality:
+    \begin{enumerate}[label=(\alph*)]
+        \item The coset $k + m\bb{Z} \in \zn{m}$ is invertible if and only if $\gcd(k, m) = 1$.
+        \item $|(\zn{m})^*| = \varphi(m)$.
+        \item $e^{2 \pi i k/m}$ is a primitive $m$th root of unity if and only if $\gcd(k, m) = 1$.
+    \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+    Exercise.
+\end{proof}
+
+\begin{theorem}
+    Let $F$ be a finite field. Then $F^*$ is cyclic.
+\end{theorem}
+
+\begin{proof}
+    Let $N = |F^*|$. Since $F^*$ is abelian, we may write
+    \[
+        F^* \cong \zn{n_1} \oplus \zn{n_2} \oplus \cdots \oplus \zn{n_k},
+    \]
+    by the structure theorem for finite abelian groups. We may additionally assume that $n_1 \mid n_2 \mid \cdots \mid n_k$. Suppose toward a contradiction that $k > 1$. Then $n_k < N$, and for any $\alpha \in F^*$, $\alpha^{n_k} = 1$. This implies that the polynomial $x^{n_k} - 1$, which is of degree strictly less than $N$, has $N$ roots, which is impossible. This forces $k = 1$, i.e. $F^*$ is cyclic.
+\end{proof}
+
+\begin{remark}
+    There is an alternative proof method here that doesn't require the structure theorem. Observe that if $\alpha \in F^*$, then $\ord{\alpha} \mid N$. For any divisor $d$ of $N$, let $g(d)$ be the number of elements of $F^*$ with order $d$. It follows that
+    \begin{enumerate}
+        \item $\sum_{d \mid N} g(d) = N$.
+        \item If $g(d) > 0$, then $g(d) = \varphi(d)$.
+        \item $\sum_{d \mid N} \varphi(d) = N$.
+    \end{enumerate}
+    These facts force $g(d) = \varphi(d)$ for all $d \mid N$. In particular, $g(N) = \varphi(N) > 0$, so there is at least one element in $F^*$ with order $|F^*|$.
+\end{remark}
+
+\section{Cyclotomic fields}
+
+\subsection{Frobenius endomorphism}
+
+\begin{definition}
+   Fix a prime $p$, and let $F$ be a field of characteristic $p$. The homomorphism
+   \[
+        \sigma_p: F \to F, \quad \alpha \longmapsto \alpha^p
+   \]
+   is called the \emph{Frobenius endomorphism}.
+\end{definition}
+
+\begin{remark}
+    Some simply call the Frobenius endomorphism the ``Frobenius".
+\end{remark}
+
+Over finite fields, this endomorphism is actually an automorphism in a suitable Galois group, which will be a useful fact in a later proof.
+
+\begin{lemma}
+    If $F$ is finite, then $\sigma_p \in \gal(F/\bb{F}_p)$.
+\end{lemma}
+
+\begin{proof}
+    Fermat's little theorem (i.e. $a^p \equiv a \pmod{p}$ for all $a \in \bb{Z}$) implies that $\sigma_p$ fixes $\bb{F}_p$. To show that $\sigma_p$ is a bijection, it is enough to show that $\sigma_p$ is injective; surjectivity will then follow because $F$ is finite. We have that $\sigma_p(0) = 0$ and $\sigma_p(a) \neq 0$ for $a \neq 0$, so using basic properties of ring homomorphisms, this implies that $\sigma_p$ is injective.
+\end{proof}
+
+\begin{remark}
+    This can be false when $F$ is infinite, as in this case $\sigma_p$ need not be surjective. Consider, for example, $F = \bb{F}_p(t)$. The image of $F$ by $\sigma_p$ is only $\bb{F}_p(t^p)$, as can be seen by Fermat's little theorem.
+\end{remark}
+
+\begin{example}
+    With $F = \bb{F}_3[i]$, the Frobenius endomorphism behaves like conjugation, in the sense that $\sigma_3(a + ib) = a - ib$, since in characteristic 3
+    \[
+        (a + ib)^3 = a^3 + (ib)^3 = a^3 - ib^3 = a - ib.
+    \]
+\end{example}
+
+\subsection{Cyclotomic fields}
+
+\begin{definition}
+   The $m$th \emph{cyclotomic field} is the splitting field $\bb{Q}(\zeta_m)$ of $x^m - 1$ over $\bb{Q}$.
+\end{definition}
+
+\begin{remark}
+    If $\fieldchar{F} = 0$, then $\bb{Q} \subseteq F$ (as the prime field of $F$), and the splitting field for $x^m - 1$ over $F$ contains $\bb{Q}(\zeta_m)$.
+\end{remark}
+
+\begin{lemma}
+\label{lem_char_0_gal_grp_monom}
+    Suppose $\fieldchar{F} = 0$. If $K$ is the splitting field of $x^m - 1$ over $F$, then there exists a monomorphism
+    \[
+        \psi : \gal(K/F) \to (\zn{m})^*.
+    \]
+\end{lemma}
+
+\begin{proof}
+    Let $G = \gal(K/F)$. Any $\sigma \in G$ is uniquely determined by its action on $\zeta_m$. Moreover, $\sigma(\zeta_m)$ must also be a primitive $m$th root, so $\sigma(\zeta_m) = \zeta_m^{k}$ for some $k$ dependent on $\sigma$ and where $\gcd(k, m) = 1$. It now suffices to define our monomorphism by $\psi(\sigma) = k + m\bb{Z}$. Checking that $\psi$ is well-defined, and that it is indeed an injective homomorphism are left as exercises.
+\end{proof}
+
+\begin{example}
+    Let $F = \bb{Q}(\sqrt{2})$, $m = 8$ and $K = \bb{Q}(\sqrt{2}, \zeta_8)$. Then our monomorphism is
+    \[
+        \psi: \gal(\bb{Q}(\sqrt{2}, \zeta_8)/\bb{Q}) \to (\zn{8})^* = \{1, 3, 5, 7\}.
+    \]
+    \cref{lem_char_0_gal_grp_monom} ensures that $\psi$ is injective, but it cannot be surjective: the issue is that $\sqrt{2} \in \bb{Q}(\zeta_8)$, as $\sqrt{2} = \zeta_8 + \zeta_8^7$. The Galois group $\gal(\bb{Q}(\zeta_8)/\bb{Q})$ has 4 elements already, 2 of which don't fix $\sqrt{2}$ (and hence do not extend to automorphisms of $\bb{Q}(\zeta_8)/\bb{Q}(\sqrt{2})$). So $\gal(\bb{Q}(\sqrt{2}, \zeta_8)/\bb{Q})$ only has 2 elements, which in turn implies $\gal(K/F)$ has 2 elements.
+\end{example}
+
+While we can only hope that $\psi$ is injective for general fields of characteristic zero, many fields one works with in practice admit a stronger property.
+
+\begin{theorem}
+\label{thm_gal_grp_isom_over_q}
+    If $F = \bb{Q}$, then $\psi$ in \cref{lem_char_0_gal_grp_monom} is an isomorphism.
+\end{theorem}
+
+\begin{proof}
+    Let $f$ be the minimal polynomial for $\zeta_m$ over $\bb{Q}$ in $\bb{Z}[x]$. By \cref{thm_aut_min_polys}, $f$ has linear factors of the form
+    \[
+        x - \sigma(\zeta_m) = x - \zeta_m^{k(\sigma)}
+    \]
+    for $\sigma \in \gal(K/\mathbb{Q})$. To show that $\psi$ is surjective, it is enough to show $(x - \zeta_m^k)$ divides $f(x)$ for all $k \in (\zn{m})^*$, as this then implies that there exists some $\sigma \in \gal(K/Q)$ with $\sigma(\zeta_m) = \zeta_m^k$ for each such $k$, i.e. $\psi(\sigma) = k$. In fact, since $(\zn{m})^*$ is generated by primes, it is actually enough to check only in the case where $k$ is a prime $p \nmid m$.
+    
+    Fix such a prime $p$, and suppose toward a contradiction that $(x - \zeta_m^p)$ does not divide $f(x)$. By Gauss' lemma, can write $x^m - 1 = f(x)g(x)$, where $g \in \bb{Z}[x]$, so it must be that $\zeta_m^p$ is a root of $g$. Since the polynomial $g(x^p)$ has $\zeta_m$ as a root, we can write $g(x^p) = f(x)h(x)$, as it must have a factor of $f(x)$ (i.e. the minimal polynomial for $\zeta_m$). Let $F$ be the splitting field for $x^m - 1$ over $\bb{F}_p$, and denote by $\overline{f}, \overline{g}, \overline{h}$ the polynomials obtained from $f, g, h$ respectively by reducing coefficients mod $p$. Now for any $\alpha \in F$, we get
+    \[
+        \overline{g}(\alpha^p) = \overline{f}(\alpha)\overline{h}(\alpha).
+    \]
+    If $\sigma_p$ is the Frobenius endomorphism on $F$, then $\overline{g}(\sigma_p(\alpha)) = \overline{f}(\alpha) \overline{h}(\alpha)$, so if $\alpha$ is a root of $\overline{f}$, then $\sigma_p(\alpha)$ is a root of $\overline{g}$. Moreover, because $\sigma_p$ is an automorphism, this implies that $\alpha$ in this case is also a root of $\overline{g}$, which shows that
+    \[
+        x^m - 1 = \overline{f}(x) \overline{g}(x)
+    \]
+    has repeated roots in $F$. This is impossible: we have $(x^m - 1)' = mx^{m - 1}$, and because $p \nmid m$, this formal derivative must be nonzero in $\bb{F}_p[x]$, which contradicts \cref{prop_derivative}. So $(x - \zeta_m^p)$ divides $f(x)$ for each prime $p \nmid m$.
+\end{proof}
+
+\begin{corollary}
+    The minimal polynomial of $\zeta_m$ over $\bb{Q}$ is
+    \[
+        f(x) = \prod_{\substack{1 \leq k \leq m \\ \gcd(k, m) = 1}} (x - \zeta_m^k) := \Phi_m(x),
+    \]
+    the $m$th cyclotomic polynomial.
+\end{corollary}
+
+\begin{exercise}
+    If $m$ is prime, give an alternative proof that
+    \[
+        x^{m - 1} + x^{m - 2} + \ldots + x + 1
+    \]
+    is irreducible, and hence is $\Phi_m(x)$ by setting $x \mapsto x + 1$ in $(x^m - 1)/(x - 1)$.
+\end{exercise}
+
+\subsection{Application to constructing regular polygons}
+
+Consider the problem of constructing the regular pentagon, which is equivalent to the construction of $\zeta_5$. By \cref{thm_gal_grp_isom_over_q}, we know
+\[
+    \gal(\bb{Q}(\zeta_5)/\bb{Q}) \cong (\zn{5})^* = \zn{4}.
+\]
+A generator for this group is, for example, the map $\sigma: \zeta \mapsto \zeta^2$. So by the Galois correspondence, the intermediate fields correspond to subgroups of $\gen{\sigma}$:
+\[
+    \begin{tikzcd}
+    	1 && {\mathbb{Q}(\zeta_5)} \\
+    	\\
+    	{\langle \sigma^2 \rangle} && {\mathbb{Q}(\zeta_5)^{\sigma^2}} \\
+    	\\
+    	{\langle \sigma \rangle} && {\mathbb{Q}}
+    	\arrow["2"', no head, from=1-1, to=3-1]
+    	\arrow["2"', no head, from=3-1, to=5-1]
+    	\arrow["2", no head, from=1-3, to=3-3]
+    	\arrow["2", no head, from=3-3, to=5-3]
+    \end{tikzcd}
+\]
+At this point, we have a quadratic tower, which is enough to say that $\zeta_5$ is constructible; however, the extension in the middle of the quadratic tower given earlier was $\bb{Q}(\sqrt{5})$, while here it is $\bb{Q}(\zeta_5)^{\sigma^2}$. We can see that these are indeed the same extensions in the following way. Note that $\sigma^2(\zeta_5) = \zeta_5^{4} = \zeta_5^{-1}$, so $\zeta_5 + \zeta_5^{-1}$ is invariant under $\sigma^2$. One can then show that
+\[
+    \bb{Q}(\zeta_5)^{\sigma^2} = \bb{Q}(\zeta_5 + \zeta_5^{-1}) = \bb{Q}(\sqrt{5}).
+\]
+Historically, Gauss did this in the substantially more involved case of the 17-gon, showing that it too is constructible.
