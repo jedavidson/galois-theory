@@ -31,4 +31,17 @@
 % Longer bidirectional stacked arrows
 \newcommand{\correspondence}{\mathrel{\substack{\longrightarrow \\[-.5ex] \longleftarrow}}}
 
+% Order
 \newcommand{\ord}{\operatorname{ord}}
+
+% Restriction
+\newcommand{\littletaller}{\mathchoice{\vphantom{\big|}}{}{}{}}
+\newcommand\restr[2]{{
+  \left.\kern-\nulldelimiterspace
+  {#1}
+  \littletaller
+  \right|_{#2}
+}}
+
+% Image
+\newcommand{\im}{\operatorname{im}}

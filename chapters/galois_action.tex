@@ -1,0 +1,119 @@
+\chapter{Galois action on Galois correspondence}
+
+Before we begin, we fix some notation. Let $K/F$ be a finite Galois extension with Galois group $G$. Write $\mathcal{F}$ for the set of intermediate fields of $K/F$, and $\mathcal{G}$ for the set of subgroups of $G$.
+
+\section{Galois action}
+
+Recall that the Galois correspondence is a bijection of $\mathcal{F}$ and $\mathcal{G}$, given by
+\[
+    L \longmapsto \gal(K/L) := L' \quad \text{and} \quad H \longmapsto K^H := H'.
+\]
+There is a two-sided action on this correspondence by $G$:
+\begin{itemize}
+    \item $G$ acts on $\mathcal{F}$ via permutation of the intermediate fields. More explicitly, if $\sigma \in G$ and $L \in \mathcal{F}$, then $\sigma(L) = \{\sigma(\alpha): \alpha \in L\}$.
+    \item $G$ acts on $\mathcal{G}$ via subgroup conjugation. More explicitly, if $\sigma \in G$ and $H \in \mathcal{G}$, then $\sigma(H) = \sigma H \sigma^{-1} = \{\sigma h \sigma^{-1}: h \in H\}$.
+\end{itemize}
+
+\begin{example}
+\label{exmp_gal_action_on_field}
+    Consider $K/F = \bb{Q}(\alpha, \omega)/\bb{Q}$ where $\alpha = \sqrt[3]{2}$ and $\omega = \zeta_3$. An intermediate field is $L = \bb{Q}(\alpha)$, and an element of $G$ is $\sigma: \alpha \mapsto \omega \alpha, \omega \mapsto \omega$. Then $\sigma(L) = \bb{Q}(\omega \alpha)$, which is another intermediate field of $K$.
+\end{example}
+
+This action ``plays nicely" with the Galois correspondence:
+
+\begin{proposition}
+\label{prop_gal_action_subgrp_conj}
+    If $L \in \mathcal{F}$ and $\sigma \in G$, then $\sigma(L)' = \sigma L' \sigma^{-1}$.
+\end{proposition}
+
+\begin{proof}
+    To show the $\supseteq$ inclusion, we must show that if $\tau \in L'$, then $\sigma \tau \sigma^{-1}$ fixes $\sigma(L)$. A typical element of $\sigma(L)$ is $\sigma(\alpha)$ for some $\alpha \in L$, so we have
+    \[
+        \sigma \tau \sigma^{-1}(\sigma(\alpha)) = \sigma \tau(\alpha) = \sigma(\alpha).
+    \]
+    A similar argument applied to $\sigma(L)$ and $\sigma^{-1}$ shows the $\subseteq$ inclusion.
+\end{proof}
+
+\begin{example}
+    We continue \cref{exmp_gal_action_on_field} to see \cref{prop_gal_action_subgrp_conj} in action. We have seen that $G \cong S_3$, and we know that $L' = \gen{(23)}$. Taking $\sigma = (12)$, we have $\sigma(L) = \bb{Q}(\omega \alpha)$. In the Galois correspondence, we then have
+    \[
+        \bb{Q}(\omega \alpha)' = (12) \gen{(23)} (12)^{-1} = \gen{(12)(23)(12)^{-1}} = \gen{(13)}.
+    \]
+\end{example}
+
+\begin{corollary}
+\label{cor_normal_subgrp_of_gal_grp_iff}
+    $H \leq G$ is normal if and only if $\sigma(H') = H'$ for all $\sigma \in G$.
+\end{corollary}
+
+\begin{proof}
+    Exercise; use \cref{prop_gal_action_subgrp_conj} along with the Galois correspondence.
+\end{proof}
+
+\section{Normality}
+
+We have seen that if $L \in \mathcal{F}$, then the ``upper extension" $K/L$ is Galois. We now give a condition for the ``bottom extension" $L/F$ to be Galois.
+
+\begin{lemma}
+\label{lem_cond_for_bottom_ext_gal}
+    Let $L \in \mathcal{F}$ be such that $\sigma(L) = L$ for all $\sigma \in G$. Then $L/F$ is Galois.
+\end{lemma}
+
+\begin{proof}
+    We must find a polynomial $p \in F[x]$ with $L$ as a splitting field. Take any set $\alpha_1, \ldots, \alpha_n$ of generators for $L/F$ (e.g., an $F$-basis for $K$), and let $p_1, \ldots, p_n \in F[x]$ be their minimal polynomials over $F$. By \cref{thm_aut_min_polys}, we can write each $p_k$ as
+    \[
+        p_k(x) = \prod_{j} (x - \beta_j)
+    \]
+    where each $\beta_j$ is an orbit of $\alpha_i$ under $G$. Since $\sigma(L) = L$, each $\beta_j \in L$. This shows that $L$ is the splitting field of $p = p_1 \cdots p_n$, and moreover that $p$ is separable, as each orbit is distinct.
+\end{proof}
+
+We can now make an addendum to \cref{thm_fund_thm_of_gal_thy}.
+
+\begin{proposition}
+\label{prop_addendum_fund_thm_of_gal_thy}
+    Take $K/F$ and $G$ as described, and let $L \in \mathcal{F}$. Then
+    \begin{enumerate}[label=(\alph*)]
+        \item L/F is Galois if and only if $L' \unlhd G$.
+        \item In this case,
+        \[
+            \gal(L/F) \cong \frac{\gal(K/F)}{\gal(K/L)} = G/L'.
+        \]
+    \end{enumerate}
+\end{proposition}
+
+\begin{proof}~
+    \begin{enumerate}[label=(\alph*)]
+        \item The $\Rightarrow$ direction follows from \cref{lem_cond_for_bottom_ext_gal} and \cref{cor_normal_subgrp_of_gal_grp_iff}. To show the $\Leftarrow$ direction, note that since $L/F$ is Galois, $L$ is the splitting field of some separable $f \in F[x]$. We can write $L = (\alpha_1, \ldots, \alpha_n)$, where the $\alpha_k$'s are the roots of $f$. Any $\sigma \in G$ permutes these roots, so in particular
+        \[
+            \sigma(L) = F(\sigma(\alpha_1), \ldots, \sigma(\alpha_n)) = L,
+        \]
+        and \cref{cor_normal_subgrp_of_gal_grp_iff} now implies that $L' \unlhd G$.
+
+        \item Consider $\restr{\sigma}{L}: L \to K$. In the situation of (a), we have $\sigma(L) = L$, so in fact $\restr{\sigma}{L}$ maps into $L$, which gives a restriction map
+        \[
+            \varphi: \gal(K/F) \to \gal(L/F), \quad \sigma \longmapsto \restr{\sigma}{L}.
+        \]
+        In particular, $\varphi$ is a group homomorphism (exercise: check this), and
+        \[
+            \ker{\varphi} = \{\sigma \in \gal(K/F): \restr{\sigma}{L} = \id_L\} = \gal(K/L) = L'.
+        \]
+        By the first isomorphism theorem, $\im{\varphi} \cong G/L'$. To see that $\phi$ is surjective, observe that $\im{\varphi}$ is a subgroup of $\gal(L/F)$, and
+        \[
+            |\im{\varphi}| = \frac{|G|}{|\ker{\varphi}|} = \frac{|G|}{|\gal(K/L)|} = \frac{[K : F]}{[K : L]} = [L : F] = |\gal(L/F)|,
+        \]
+        so it must be that $\im{\varphi} = \gal(L/F)$.
+        \qedhere
+    \end{enumerate}
+\end{proof}
+
+\begin{example}
+    We continue \cref{exmp_gal_action_on_field} once again to verify a concrete case of this addendum. Considering the full Galois correspondence for $K/F$ shown in \cref{exmp_full_gal_corresp_for_cbrt_2}, we know that the normal subgroups of $G$ are $1, \gen{(123)}$ and $G$. In the case of $\gen{(123)}$, \cref{prop_addendum_fund_thm_of_gal_thy} says that the corresponding extension $\bb{Q}(\omega)/\bb{Q}$ is Galois, which checks out. Moreover, $\gal(\bb{Q}(\omega)/\bb{Q}) \cong S_3/\gen{(123)}$, which may be obtained by applying the first isomorphism theorem to the map
+    \[
+        S_3 \to \gal(\bb{Q}(\omega)/\bb{Q}), \quad \sigma \longmapsto \restr{\sigma}{\bb{Q}(\omega)}.
+    \]
+    On the other hand, $\gen{(23)}$ is not a normal subgroup of $G$, and so its corresponding extension $\bb{Q}(\alpha)/\bb{Q}$ is not Galois, which also checks out.
+\end{example}
+
+\begin{example}
+    Consider the Galois group $G = \gal(\bb{Q}(\zeta_5)/\bb{Q})$ in \cref{subsect_constr_reg_polys}. We saw that $G \cong \gen{\sigma} \cong \zn{4}$, where $\sigma: \zeta_5 \mapsto \zeta_5^2$. The fact that $\gen{\sigma^2}$ is a normal subgroup of $G$ corresponds to the fact that $\bb{Q}(\sqrt{5})/\bb{Q}$ is Galois. The associated restriction map restricts any $\sigma \in G$ to $\bb{Q}(\sqrt{5})$.
+\end{example}
