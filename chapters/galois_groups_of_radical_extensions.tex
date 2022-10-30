@@ -1,0 +1,47 @@
+\chapter{Galois groups of radical extensions}
+
+Assume for this chapter that $\fieldchar{F} = 0$. Let $\mu_n$ be the group of $n$th roots of unity in a splitting field $L$ for $x^n - 1$ over $F$. In particular, $\mu_n$ is cyclic of order $n$.
+
+\section{The simplest case}
+
+The aim of this section is to generalise the observation that
+\[
+    \gal\left(\bb{Q}(\sqrt[3]{2}, \zeta_3) / \bb{Q}(\zeta_3)\right) \cong \zn{3}.
+\]
+In the situations where it is applicable, this will give us a powerful tool for identifying Galois groups as cyclic groups of prime order.
+
+\begin{proposition}
+    Let $p$ be prime, and $F$ a field where $x^p - 1$ splits (i.e. $F$ contains all $p$th roots of unity). Let $\alpha \in F$ and $K = F(\sqrt[p]{\alpha})$ (i.e. adjoin a root of $x^p - \alpha$). Then
+    \begin{enumerate}[label=(\alph*)]
+        \item $K$ is the splitting field of $x^p - \alpha$.
+        \item If $\sqrt[p]{\alpha} \not\in F$, then we have a well-defined group isomorphism
+        \[
+            \varphi: G := \gal(K/F) \to \mu_p, \quad \sigma \isomap \frac{\sigma(\sqrt[p]{\alpha})}{\sqrt[p]{\alpha}}.
+        \]
+    \end{enumerate}
+\end{proposition}
+
+\begin{proof}~
+    \begin{enumerate}[label=(\alph*)]
+        \item Clear, as $\mu_p \subseteq F$, and the roots of $x^p - \alpha$ are $\omega \sqrt[p]\alpha$ for $\omega \in \mu_p$.
+        \item We know that $\sigma(\sqrt[p]{\alpha})$ is a root of $x^p - \alpha$, so $\sigma(\sqrt[p]{\alpha})/\sqrt[p]{\alpha}$ is a root of $x^p - 1$, which is to say that it is a $p$th root of unity. Checking that $\varphi$ is a group homomorphism is left an exercise. Because any $\sigma \in G$ is uniquely determined by $\sigma(\sqrt[p]{\alpha})$, it follows that $\varphi(\sigma) \neq \varphi(\tau)$ whenever $\sigma \neq \tau$, so $\varphi$ is injective. Finally, we have
+        \begin{align*}
+            \sqrt[p]{\alpha} \not\in F
+            \; \Rightarrow \;
+            [K : F] > 1
+            \; \Rightarrow \;
+            |G| > 1
+            \; \Rightarrow \;
+            \im{\varphi} > 1,
+        \end{align*}
+        which forces $\im{\varphi} = \mu_p$, as $\mu_p$ is cyclic of order $p$. \qedhere
+    \end{enumerate}
+\end{proof}
+
+\begin{remark}
+    The reasoning in part (b) of this proof shows that $[K : F] = p$, and so in particular, $x^p - \alpha$ is irreducible over $F$.
+\end{remark}
+
+\section{Solvability}
+
+TODO: Monday lecture.

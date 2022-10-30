@@ -152,7 +152,7 @@ The next result details how an isomorphism of fields can be extended to an isomo
     which sends $\alpha_1 \mapsto \alpha_2$, $\alpha_2 \mapsto \alpha_3$ and $\alpha_3 \mapsto \alpha_1$, which is the 3-cycle $(123)$. So $G$ is a subgroup containing $(12)$ and $(123)$, which implies $G \cong S_3$ exactly.
 \end{example}
 
-Another useful result is that field isomorphisms extend to isomorphisms of splitting fields.
+The last useful result we will need is that field isomorphisms extend to isomorphisms of splitting fields.
 
 \begin{proposition}
 \label{prop_field_isom_ext_to_spl_field_isom}
@@ -160,29 +160,36 @@ Another useful result is that field isomorphisms extend to isomorphisms of split
 \end{proposition}
 
 \begin{proof}
-    Exercise. The idea is to use \cref{prop_field_isom_lifts_to_root_isom} and then induction.
-    \begin{figure}[h]
-        \[
-            \begin{tikzcd}
-            	F && {F'} \\
-            	\\
-            	{F(\alpha)} && {F'(\alpha')} \\
-            	\\
-            	K && {K'}
-            	\arrow["{\sigma}", from=1-1, to=1-3]
-            	\arrow[hook, from=1-1, to=3-1]
-            	\arrow[hook', from=1-3, to=3-3]
-            	\arrow["{\sim \text{ via prop.}}", from=3-1, to=3-3]
-            	\arrow[hook, from=3-1, to=5-1]
-            	\arrow[hook', from=3-3, to=5-3]
-            	\arrow["{\widetilde{\sigma} \text{ via ind.}}", from=5-1, to=5-3]
-            \end{tikzcd}
-        \]
-    \caption{Diagram of required construction for \cref{prop_field_isom_ext_to_spl_field_isom}}
-    \end{figure}
+    The claim is trivial if $\deg{f} = 1$, so assume $\deg{f} \geq 2$. Then $f$ has an irreducible factor $g \in F[x]$ with $\deg{g} \geq 2$. Let $\alpha_1, \alpha_1'$ be roots of $g, \sigma g$ in $K, K'$ respectively. By \cref{prop_field_isom_lifts_to_root_isom}, there is an isomorphism $\widetilde{\sigma}_1: F(\alpha_1) \to F'(\alpha_1')$ with $\sigma = \widetilde{\sigma}_1$ on $F$. Repeating this process until $f$ no longer has irreducible factors of degree $\geq 2$ via induction, we obtain a field isomorphism
+    \[
+        \widetilde{\sigma} = \widetilde{\sigma}_k: F(\alpha = \alpha_1, \alpha_2, \ldots, \alpha_k) \to F'(\alpha' = \alpha_1', \alpha_2', \ldots, \alpha_k')
+    \]
+    with $\sigma = \widetilde{\sigma}$ on $F$. Now $f$ splits in $F(\alpha_1, \ldots, \alpha_k)$, and $\sigma f$ splits in $F'(\alpha_1', \ldots, \alpha_k')$, so $K = F(\alpha_1, \ldots, \alpha_k)$ and $K' = F'(\alpha_1', \ldots, \alpha_k')$, so $\widetilde{\sigma}$ is the required isomorphism of splitting fields.
+    % \begin{figure}[h]
+    %     \[
+    %         \begin{tikzcd}
+    %         	F && {F'} \\
+    %         	\\
+    %         	{F(\alpha)} && {F'(\alpha')} \\
+    %         	\\
+    %         	K && {K'}
+    %         	\arrow["{\sigma}", from=1-1, to=1-3]
+    %         	\arrow[hook, from=1-1, to=3-1]
+    %         	\arrow[hook', from=1-3, to=3-3]
+    %         	\arrow["{\sim \text{ via prop.}}", from=3-1, to=3-3]
+    %         	\arrow[hook, from=3-1, to=5-1]
+    %         	\arrow[hook', from=3-3, to=5-3]
+    %         	\arrow["{\widetilde{\sigma} \text{ via ind.}}", from=5-1, to=5-3]
+    %         \end{tikzcd}
+    %     \]
+    % \caption{Diagram of required construction for \cref{prop_field_isom_ext_to_spl_field_isom}}
+    % \end{figure}
 \end{proof}
 
-\begin{theorem}[Existence and uniqueness of splitting fields]
+We can now prove the existence and uniqueness theorem for splitting fields.
+
+\begin{theorem}
+\label{thm_exist_uniq_of_spl_field}
     Let $F$ be a field and $f \in F[x]$ be non-constant. Then
     \begin{enumerate}[label=(\alph*)]
         \item there exists a splitting field for $f$ over $F$, and
@@ -190,11 +197,17 @@ Another useful result is that field isomorphisms extend to isomorphisms of split
     \end{enumerate}
 \end{theorem}
 
-\begin{proof}
-    For (a), we proceed by induction on $n = \deg{f}$. The claim is obvious when $n = 1$, because $F$ is a splitting field in this case. Now suppose $n > 1$, and that $g \in F[x]$ is an irreducible factor of $f$ (possibly $f$ itself). Assume that there is a splitting field for any polynomial of degree $n - 1$ over $F$. By \cref{prop_exists_field_ext_containing_root}, there is a simple field extension $F(\alpha)/F$ containing a root $\alpha$ of $g$. By the factor theorem, we can thus write $f(x) = (x - \alpha) h(x)$, where $h \in F(\alpha)[x]$ is of degree $n - 1$. By inductive hypothesis, there is a splitting field $K$ for $h$ over $F(\alpha)$, and moreover this field is also a splitting field for $f$ over $F$, so we are done.
-    
-    The proof of (b) is an exercise: use \cref{prop_field_isom_ext_to_spl_field_isom}.
+\begin{proof}~
+    \begin{enumerate}[label=(\alph*)]
+        \item We proceed by induction on $n = \deg{f}$. The claim is obvious when $n = 1$, because $F$ is a splitting field in this case. Now suppose $n > 1$, and that $g \in F[x]$ is an irreducible factor of $f$ (possibly $f$ itself). Assume that there is a splitting field for any polynomial of degree $n - 1$ over $F$. By \cref{prop_exists_field_ext_containing_root}, there is a simple field extension $F(\alpha)/F$ containing a root $\alpha$ of $g$. By the factor theorem, we can thus write $f(x) = (x - \alpha) h(x)$, where $h \in F(\alpha)[x]$ is of degree $n - 1$. By inductive hypothesis, there is a splitting field $K$ for $h$ over $F(\alpha)$, and moreover this field is also a splitting field for $f$ over $F$, so we are done.
+        \item Follows from \cref{prop_field_isom_ext_to_spl_field_isom} by letting $F = F'$ and $\sigma = \id_F$. \qedhere
+    \end{enumerate}
 \end{proof}
+
+\begin{remark}
+\label{rem_spl_field_isom_fixes_base}
+    The \cref{prop_field_isom_ext_to_spl_field_isom} used in (b) also implies that any isomorphism of splitting fields for $f$ over $F$ must fix $F$.
+\end{remark}
 
 We end off by discussing a purely algebraic construction of the splitting field in \cref{exmp_spl_field_of_cbrt_2}, i.e. one which doesn't assume the existence of $\bb{R}$ and $\bb{C}$.
 

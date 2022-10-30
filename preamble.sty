@@ -15,14 +15,18 @@
 \usepackage{caption} % Better captions
 \usepackage{bm} % Italic bold-face vectors
 \usepackage[scr=boondoxo]{mathalpha} % Math script fontface
+% \usepackage{parskip} % Paragraph spacing control
+
+% \setlength{\parskip}{6pt}
+% \setlength{\parindent}{12pt}
 
 % Use subsection labels for figures
 \counterwithin{figure}{section}
 
 % Section formats
-\renewcommand*{\sectionformat}{\color{purple}\S\thesection\autodot\enskip}
-\renewcommand*{\subsectionformat}{\color{purple}\S\thesubsection\autodot\enskip}
-\renewcommand*{\chapterformat}{\color{purple}\S\thechapter\autodot\enskip}
+\renewcommand*{\sectionformat}{\color{black}\S\thesection\autodot\enskip}
+\renewcommand*{\subsectionformat}{\color{black}\S\thesubsection\autodot\enskip}
+\renewcommand*{\chapterformat}{\color{black}\S\thechapter\autodot\enskip}
 
 % amsthm setup
 \theoremstyle{definition}
