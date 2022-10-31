@@ -44,7 +44,7 @@ This process is unwieldy to use as a practical check for constructibility. The n
 
 \begin{theorem}
 \label{thm_constructible_iff_in_quadratic_tower}
-    The number $z \in \bb{C}$ is constructible if and only if $z \in K$ for some $K$ contained in a quadratic tower over $\bb{Q}$.
+    The number $z \in \bb{C}$ is constructible iff $z \in K$ for some $K$ contained in a quadratic tower over $\bb{Q}$.
 \end{theorem}
 
 \begin{proof}
@@ -53,7 +53,7 @@ This process is unwieldy to use as a practical check for constructibility. The n
 
 One geometric question we could ask is ``for what $n$ can we construct a regular $n$-gon using a ruler and compass?'' Clearly for $n = 3, 4$ this is possible, and it was known to the Greeks that the regular pentagon was constructible.
 
-In general, constructing the $n$-gon is equivalent\footnote{in the if and only if sense} to constructing $\zeta_n = e^{2 \pi i/n}$, and using \cref{thm_constructible_iff_in_quadratic_tower}, we can further refine the problem to identifying for which $n$ does $e^{2 \pi i/n}$ lie in a quadratic tower of $\bb{Q}$. For $n = 3, 4$ this is once again clear, as their minimal polynomials are quadratics. Seeing that it holds for $n = 5$ is already tricky: however, it turns out that
+In general, constructing the $n$-gon is equivalent\footnote{in the iff sense} to constructing $\zeta_n = e^{2 \pi i/n}$, and using \cref{thm_constructible_iff_in_quadratic_tower}, we can further refine the problem to identifying for which $n$ does $e^{2 \pi i/n}$ lie in a quadratic tower of $\bb{Q}$. For $n = 3, 4$ this is once again clear, as their minimal polynomials are quadratics. Seeing that it holds for $n = 5$ is already tricky: however, it turns out that
 \[
     \zeta_5 - \zeta_5^2 - \zeta_5^3 + \zeta_5^4 = \sqrt{5},
 \]
@@ -72,9 +72,9 @@ which is impossible since $6 \nmid 2^n$. In other words, the regular heptagon is
 \begin{proposition}
     Some facts related to relative primality:
     \begin{enumerate}[label=(\alph*)]
-        \item The coset $k + m\bb{Z} \in \zn{m}$ is invertible if and only if $\gcd(k, m) = 1$.
+        \item The coset $k + m\bb{Z} \in \zn{m}$ is invertible iff $\gcd(k, m) = 1$.
         \item $|(\zn{m})^*| = \varphi(m)$.
-        \item $e^{2 \pi i k/m}$ is a primitive $m$th root of unity if and only if $\gcd(k, m) = 1$.
+        \item $e^{2 \pi i k/m}$ is a primitive $m$th root of unity iff $\gcd(k, m) = 1$.
     \end{enumerate}
 \end{proposition}
 

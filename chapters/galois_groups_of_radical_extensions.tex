@@ -1,8 +1,8 @@
 \chapter{Galois groups of radical extensions}
 
-Assume for this chapter that $\fieldchar{F} = 0$. Let $\mu_n$ be the group of $n$th roots of unity in a splitting field $L$ for $x^n - 1$ over $F$. In particular, $\mu_n$ is cyclic of order $n$.
+Assume for this chapter that $\fieldchar{F} = 0$ for all base fields $F$ we work over. Let $\mu_n$ be the group of $n$th roots of unity in a splitting field $L$ for $x^n - 1$ over $F$. In particular, $\mu_n$ is cyclic of order $n$.
 
-\section{The simplest case}
+\section{The simple case}
 
 The aim of this section is to generalise the observation that
 \[
@@ -11,22 +11,23 @@ The aim of this section is to generalise the observation that
 In the situations where it is applicable, this will give us a powerful tool for identifying Galois groups as cyclic groups of prime order.
 
 \begin{proposition}
-    Let $p$ be prime, and $F$ a field where $x^p - 1$ splits (i.e. $F$ contains all $p$th roots of unity). Let $\alpha \in F$ and $K = F(\sqrt[p]{\alpha})$ (i.e. adjoin a root of $x^p - \alpha$). Then
+\label{prop_gal_grp_isom_for_root_of_unity_field}
+    Let $p$ be prime, and $F$ a field where $x^p - 1$ splits (i.e. $F$ contains all $p$th roots of unity). Let $\alpha \in F$ and $K = F(\sqrt[\uproot{3} p]{\alpha})$ (i.e. adjoin a root of $x^p - \alpha$). Then
     \begin{enumerate}[label=(\alph*)]
         \item $K$ is the splitting field of $x^p - \alpha$.
-        \item If $\sqrt[p]{\alpha} \not\in F$, then we have a well-defined group isomorphism
+        \item If $\sqrt[\uproot{3} p]{\alpha} \not\in F$, then we have a well-defined group isomorphism
         \[
-            \varphi: G := \gal(K/F) \to \mu_p, \quad \sigma \isomap \frac{\sigma(\sqrt[p]{\alpha})}{\sqrt[p]{\alpha}}.
+            \varphi: G := \gal(K/F) \to \mu_p, \quad \sigma \isomap \frac{\sigma(\sqrt[\uproot{3} p]{\alpha})}{\sqrt[\uproot{3} p]{\alpha}}.
         \]
     \end{enumerate}
 \end{proposition}
 
 \begin{proof}~
     \begin{enumerate}[label=(\alph*)]
-        \item Clear, as $\mu_p \subseteq F$, and the roots of $x^p - \alpha$ are $\omega \sqrt[p]\alpha$ for $\omega \in \mu_p$.
-        \item We know that $\sigma(\sqrt[p]{\alpha})$ is a root of $x^p - \alpha$, so $\sigma(\sqrt[p]{\alpha})/\sqrt[p]{\alpha}$ is a root of $x^p - 1$, which is to say that it is a $p$th root of unity. Checking that $\varphi$ is a group homomorphism is left an exercise. Because any $\sigma \in G$ is uniquely determined by $\sigma(\sqrt[p]{\alpha})$, it follows that $\varphi(\sigma) \neq \varphi(\tau)$ whenever $\sigma \neq \tau$, so $\varphi$ is injective. Finally, we have
+        \item Clear, as $\mu_p \subseteq F$, and the roots of $x^p - \alpha$ are $\omega \sqrt[\uproot{3} p]\alpha$ for $\omega \in \mu_p$.
+        \item We know that $\sigma(\sqrt[\uproot{3} p]{\alpha})$ is a root of $x^p - \alpha$, so $\sigma(\sqrt[\uproot{3} p]{\alpha})/\sqrt[\uproot{3} p]{\alpha}$ is a root of $x^p - 1$, which is to say that it is a $p$th root of unity. Checking that $\varphi$ is a group homomorphism is left an exercise. Because any $\sigma \in G$ is uniquely determined by $\sigma(\sqrt[\uproot{3} p]{\alpha})$, it follows that $\varphi(\sigma) \neq \varphi(\tau)$ whenever $\sigma \neq \tau$, so $\varphi$ is injective. Finally, we have
         \begin{align*}
-            \sqrt[p]{\alpha} \not\in F
+            \sqrt[\uproot{3} p]{\alpha} \not\in F
             \; \Rightarrow \;
             [K : F] > 1
             \; \Rightarrow \;
@@ -34,7 +35,7 @@ In the situations where it is applicable, this will give us a powerful tool for 
             \; \Rightarrow \;
             \im{\varphi} > 1,
         \end{align*}
-        which forces $\im{\varphi} = \mu_p$, as $\mu_p$ is cyclic of order $p$. \qedhere
+        which forces $\im{\varphi} = \mu_p$, as $\mu_p$ is of prime order. \qedhere
     \end{enumerate}
 \end{proof}
 
@@ -44,4 +45,72 @@ In the situations where it is applicable, this will give us a powerful tool for 
 
 \section{Solvability}
 
-TODO: Monday lecture.
+\begin{definition}
+    Let $G$ be a finite group. A \emph{normal chain} of subgroups is a sequence
+    \[
+        G_0 = 1 \unlhd G_1 \unlhd G_2 \unlhd \cdots \unlhd G_n = G.
+    \]
+    The quotients $G_{k + 1}/G_k$ are called \emph{factors}. We say that $G$ is \emph{solvable} if there exists such a chain with all factors either trivial or cyclic groups of prime order.
+\end{definition}
+
+\begin{remark}
+    This definition of solvability only works for finite groups, although the concept may be defined for infinite groups if one only insists that each factor is abelian.
+\end{remark}
+
+\begin{example}
+\label{exmp_solvable_groups}
+    Many groups we have seen before are solvable:
+    \begin{enumerate}
+        \item 
+        There is a nontrivial normal chain $1 \unlhd A_3 \unlhd S_3$, and its factors are
+        \[
+            S_3/A_3 \cong \zn{2}, \quad A_3/1 \cong A_3 \cong \zn{3},
+        \]
+        so $S_3$ is solvable.
+        
+        \item Any cyclic group $\zn{n}$ is solvable for $n \geq 1$. To see this, consider the factorisation $n = p_1 p_2 \cdots p_m$ into (not necessarily distinct) primes $p_k$. Then
+        \[
+            1 = (p_1 p_2 \cdots p_m) \zn{n} \unlhd (p_1 p_2 \cdots p_{m - 1}) \zn{n} \unlhd \cdots \unlhd \zn{n}
+        \]
+        is a normal chain, and by the second isomorphism theorem, its factors are
+        \[
+            \frac{(p_1 p_2 \cdots p_{k - 1}) \zn{n}}{(p_1 p_2 \cdots p_k) \zn{n}} \cong \frac{(p_1 p_2 \cdots p_{k - 1}) \bb{Z}}{(p_1 p_2 \cdots p_k) \bb{Z}} \cong \zn{p_k}. \qedhere
+        \]
+    \end{enumerate}
+\end{example}
+
+\begin{remark}
+    The fact that $G_k \unlhd G_{k + 1}$ does not necessarily imply $G_k \unlhd G$. For example, if $G = D_8 = \gen{\tau, \sigma}$, then $\gen{\tau} \unlhd \gen{\tau, \sigma^2}$, but $\gen{\tau} \ntrianglelefteq D_8$.
+\end{remark}
+
+\begin{theorem}
+    Consider a radical tower
+    \[
+        F = F_0 \subseteq F_1 \subseteq \cdots \subseteq F_n = K
+    \]
+    with $F_{k + 1} = F_k(\sqrt[\uproot{3} p_k]{\alpha_k})$ for some $\alpha_k \in F_k$ and $p_k$ prime. Suppose each polynomial $x^{p_k} - 1$ splits in $F[x]$ and that $K/F$ is Galois. Then $G = \gal(K/F)$ is solvable.
+\end{theorem}
+
+\begin{proof}
+    Using the Galois correspondence, there exists a chain of subgroups
+    \[
+        G = F_0' \geq F_1' \geq F_2' \geq \cdots \geq F_n' = 1. \tag{$*$}
+    \]
+    Since $K/F$ is Galois, so is each upper extension $K/F_k$. By \cref{prop_addendum_fund_thm_of_gal_thy}, we have $\gal(K/F_{k + 1}) = F_{k + 1}' \unlhd F_k' = \gal(K/F_k)$, and the factors have the form
+    \[
+        F_k'/F_{k + 1}' \cong \gal(F_{k + 1}/F_k).
+    \]
+    By \cref{prop_gal_grp_isom_for_root_of_unity_field}\footnote{with $p = p_k$, $F = F_k$ and $\alpha = \alpha_k$}, each of these factors is either isomorphic to $\zn{p_k}$ or trivial, so the required chain is in fact ($*$).
+\end{proof}
+
+\begin{example}
+    Consider the biquadratic extension
+    \[
+        \bb{Q} \subseteq \bb{Q}(\sqrt{2}) \subseteq \bb{Q}(\sqrt{2}, \sqrt{3})
+    \]
+    with $G = \gal(\bb{Q}(\sqrt{2}, \sqrt{3})/\bb{Q})) \cong K_4$. The normal chain is
+    \[
+        1 \unlhd \gen{(34)} \unlhd G,
+    \]
+    with factors $\gen{(34)}/1 \cong G/\gen{(34)} \cong \zn{2}$.
+\end{example}

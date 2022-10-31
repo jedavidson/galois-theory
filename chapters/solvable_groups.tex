@@ -1,0 +1,182 @@
+\chapter{More on solvable groups}
+
+The aim of this chapter is to study other conditions for a group to be solvable.
+
+\section{Subgroups and quotients}
+
+\begin{proposition}~
+    \begin{enumerate}[label=(\alph*)]
+        \item If $G$ and $H$ are solvable, so is $G \times H$.
+        \item All finite abelian groups are solvable.
+    \end{enumerate}
+\end{proposition}
+
+\begin{proof}~
+    \begin{enumerate}[label=(\alph*)]
+        \item Assume we have normal chains
+        \[
+            1 = G_0 \unlhd G_1 \unlhd \cdots \unlhd G_n = G
+            \quad \text{and} \quad
+            1 = H_0 \unlhd H_1 \unlhd \cdots \unlhd H_m = H
+        \]
+        with cyclic factors of prime order. A sufficient normal chain for $G \times H$ is
+        \begin{align*}
+            1 \times 1 \unlhd G_1 \times 1 \unlhd \cdots &\unlhd G_n \times 1 \\
+            &\unlhd G_n \times H_1 \unlhd G_n \times H_2 \unlhd \cdots \unlhd G_n \times H_m = G \times H.
+        \end{align*}
+        As an exercise, check that the chain's factors up to $G_n \times 1$ are isomorphic to $G_{k + 1}/G_k$, and $H_{k + 1}/H_k$ in the rest of the chain.
+        
+        \item Any finite abelian group $G$ is the product of cyclic groups by the structure theorem, which are all solvable by \cref{exmp_solvable_groups}. Now use (a). \qedhere
+    \end{enumerate}
+\end{proof}
+
+\begin{proposition}
+\label{prop_solvability_of_subgroups_and_quots}
+    Let $G$ be a finite group, $H \leq G$ and $N \unlhd G$. Then
+    \begin{enumerate}[label=(\alph*)]
+        \item If $G$ is solvable, then so is $H$.
+        \item $G$ is solvable iff $N$ and $G/N$ are solvable.
+    \end{enumerate}
+\end{proposition}
+
+\begin{proof} ~
+    \begin{enumerate}[label=(\alph*)]
+        \item A candidate chain for $H$
+        \[
+            1 = G_0 \cap H \leq G_1 \cap H \leq \cdots \leq G_n \cap H = G \cap H = H.
+        \]
+        Each $G_k \cap H$ is normal in $G_{k + 1} \cap H$, since for all $g \in G_{k + 1} \cap H$, we have $g \in H$ and $G_k \unlhd G_{k + 1}$, so
+        \[
+            g(G_k \cap H)g^{-1} = gG_kg^{-1} \cap gHg^{-1} = G_k \cap H.
+        \]
+        Moreover, the third isomorphism gives
+        \[
+            \frac{G_{k + 1} \cap H}{G_k \cap H} \cong \frac{G_{k + 1} \cap H}{(G_{k + 1} \cap H) \cap G_k} \cong \frac{(G_{k + 1} \cap H) G_k}{G_k} \leq G_{k + 1}/G_k,
+        \]
+        so each factor in this chain is a subgroup of a cyclic group of prime order, i.e. is trivial or that same cyclic group. So $H$ is solvable.
+        
+        \item Let us first prove the $\Leftarrow$ direction first. Assume we have normal chains
+        \[
+            1 = N_0 \unlhd N_1 \unlhd \cdots \unlhd N_r = N
+        \]
+        and
+        \[
+            1_{G/N} = G_0/N \unlhd G_1/N \unlhd \cdots \unlhd G_s/N = G/N.
+        \]
+        with cyclic factors of prime order. A suitable chain for $G$ is simply
+        \[
+            1 = N_0 \unlhd \cdots N_r = N = G_0 \unlhd G_1 \unlhd \cdots \unlhd G_s = G.
+        \]
+        Its factors are exactly $N_{k + 1}/N_k$ and $G_{k + 1}/G_k \cong (G_{k + 1}/N)/(G_{k}/N)$, so $G$ is also solvable. To prove the $\Rightarrow$ direction, we assume $G$ is solvable, that is, it has normal chain
+        \[
+            1 = G_0 \unlhd G_1 \unlhd \cdots \unlhd G_n = G
+        \]
+        with cyclic factors of prime order. The argument used in (a) proves that $N$ is solvable, so it suffices to check that $G/N$ is solvable. Applying the quotient morphism $\pi: G \to G/N$ to the normal chain for $G$ gives a chain
+        \[
+            1 = \pi(G_0) \leq \pi(G_1) \leq \cdots \leq \pi(G_n) = G/N.
+        \]
+        This chain is in fact normal, since if $g \in G_{k + 1}$, we have
+        \[
+            \pi(g) \pi(G_k) \pi(g)^{-1} = \pi(gG_kg^{-1}) = \pi(G_k).
+        \]
+        To see that the factors are trivial or cyclic of prime order, note that there is a surjective group homomorphism
+        \[
+            \overline{\pi}: G_{k + 1}/G_k \to \pi(G_{k + 1})/\pi(G_k), \quad gG_{k} \longmapsto \pi(g)\pi(G_k).
+        \]
+        The proof of this last fact is straightforward and left as an exercise. \qedhere
+    \end{enumerate}
+\end{proof}
+
+\begin{corollary}
+\label{cor_solvable_iff_ab_factors}
+    A finite group $G$ is solvable iff it has a normal chain
+    \[
+        1 = G_0 \unlhd G_1 \unlhd \cdots \unlhd G_n = G
+    \]
+    with abelian factors.
+\end{corollary}
+
+\begin{proof}
+    The $\Rightarrow$ direction is clear. For the $\Leftarrow$ direction, we proceed by induction on $n$. The claim is clear when $n = 1$, so suppose $n \geq 1$. By hypothesis, $G_{n - 1}$ is solvable, and $G/G_{n - 1}$ is also solvable (as it is a finite abelian group). The result now follows by \cref{prop_solvability_of_subgroups_and_quots}.
+\end{proof}
+
+\section{Derived series}
+
+In what follows, let $G$ be a (not necessarily finite) group.
+
+\begin{definition}
+    The \emph{commutator} of $g, h \in G$ is $[g, h] := g^{-1}h^{-1}gh$.
+\end{definition}
+
+\begin{remark}
+    In an abstract sense, these commutators measure the failure of $g$ and $h$ to commute.
+\end{remark}
+
+\begin{definition}
+    The \emph{commutator subgroup} $[G, G]$ is the subgroup of $G$ generated by all of its commutators.
+\end{definition}
+
+\begin{lemma}
+\label{lem_commutator_props}
+    Let $C = [G, G]$. Then
+    \begin{enumerate}[label=(\alph*)]
+        \item $C \unlhd G$.
+        \item If $N \unlhd G$, then $G/N$ is abelian iff $N \supseteq C$.
+        \item In particular, $G/C$ is abelian.
+    \end{enumerate}
+\end{lemma}
+
+\begin{proof}~
+    \begin{enumerate}[label=(\alph*)]
+        \item Exercise.
+        \item Given $N \unlhd G$, then
+        \begin{align*}
+            G/N \text{ is abelian}
+            &\quad \iff \quad
+            (gN)(hN) = (hN)(gN) \quad \forall g, h \in G \\
+            &\quad \iff \quad
+            ghN = hgN \quad \forall g, h \in G \\
+            &\quad \iff \quad
+            g^{-1}h^{-1}ghN = N \quad \forall g, h \in G \\
+            &\quad \iff \quad
+            [g, h] \in N \quad \forall g, h \in G \\
+            &\quad \iff \quad
+            C \subseteq N.
+        \end{align*}
+        \item Follows by (b). \qedhere
+    \end{enumerate}
+\end{proof}
+
+\begin{remark}
+    The quotient $G/C$ is called the \emph{abelianisation} of $G$.
+\end{remark}
+
+\begin{definition}
+    The \emph{derived series} of $G$ is the infinite normal chain
+    \[
+        G = G^{(0)} \unrhd G^{(1)} \unrhd G^{(2)} \unrhd \cdots,
+    \]
+    where $G^{(k + 1)} = [G^{(k)}, G^{(k)}].$
+\end{definition}
+
+\begin{corollary}
+    A finite group $G$ is solvable iff $G^{(n)} = 1$ for some $n$.
+\end{corollary}
+
+\begin{proof}
+    The $\Rightarrow$ direction follows by \cref{cor_solvable_iff_ab_factors} and \cref{lem_commutator_props}, since in this case the derived series truncated at $G^{(n)}$ is a normal chain with abelian factors. For the $\Leftarrow$ direction, suppose we have a (descending) normal chain
+    \[
+        G = G_0 \unrhd G_1 \unrhd \cdots \unrhd G_n = 1
+    \]
+    with abelian factors. It suffices to show that $G^{k} \geq G^{(k)}$ for each $k$, as this implies that $G^{(n)} = 1$. The base case $k = 0$ is obvious. For the inductive step, assume $G_k \geq G^{(k)}$. By construction, the factor $G_k/G_{k + 1}$ is abelian, so using part (b) of \cref{lem_commutator_props}, we obtain
+    \[
+        G_{k + 1} \geq [G_k, G_k] \geq [G^{(k)}, G^{(k)}] = G^{(k + 1)}. \qedhere
+    \]
+\end{proof}
+
+% \begin{example}
+%     We know that $[S_3, S_3] = A_3$, and because $A_3$ is abelian, we have $[A_3, A_3] = 1$. Thus the derived series for $S_3$ is
+%     \[
+%         S_3 \unrhd A_3 \unrhd 1.
+%     \]
+% \end{example}

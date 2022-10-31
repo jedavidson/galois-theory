@@ -3,10 +3,10 @@
 \usepackage{preamble}
 \usepackage{commands}
 
-\title{\bfseries{\textcolor{purple}{MATH5725 Galois Theory}}}
+\title{\bfseries{\textcolor{black}{MATH5725 Galois Theory}}}
 \author{
     Notes by James Davidson \\
-    based on the lectures of David Harvey
+    based on the lectures of David Harvey and Daniel Chan
 }
 \date{Term 3, 2022}
 
@@ -14,7 +14,10 @@
 
 \maketitle
 
-\tableofcontents
+{
+    \hypersetup{hidelinks}
+    \tableofcontents
+}
 
 \include{chapters/revision}
 \include{chapters/motivation}
@@ -27,5 +30,7 @@
 \include{chapters/galois_action}
 \include{chapters/galois_closure}
 \include{chapters/galois_groups_of_radical_extensions}
+\include{chapters/solvable_groups}
+\include{chapters/insolvable_and_p_groups}
 
 \end{document}
