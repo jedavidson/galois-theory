@@ -1,0 +1,126 @@
+\chapter{Computing Galois groups of polynomials}
+
+\section{A specific quintic not solvable by radicals}
+
+\subsection{Preliminaries}
+
+\begin{theorem}[Cauchy]
+    If $G$ is a finite group, $p$ is prime and $p \mid |G|$, then $G$ contains an element of order $p$.
+\end{theorem}
+
+\begin{proof}
+    Let
+    \[
+        X := \{(g_1, g_2, \ldots, g_p) \in G^p: g_1 \cdots g_p = 1\}.
+    \]
+    Note that $g_p$ is determined by $g_1, \ldots, g_{p - 1}$, so $|X| = |G|^{p - 1}$, which is divisible by $p$. Also, $X$ is closed under cyclic permutations of the $g_k$'s, because
+    \[
+        g_1 \cdots g_p = 1 \implies g_1 \cdots g_p g_p^{-1} = g_p^{-1} \implies g_p g_1 \cdots g_{p - 1} = 1.
+    \]
+    Consider the equivalence classes of $X$ under cyclic permutations. That is, we consider two tuples in $X$ equivalent if one is obtainable by cyclic permutation of the other. Each equivalence class is either of the form
+    \begin{enumerate}
+        \item $[(g, g, \ldots, g)]$, of size 1, or
+        \item $[(g_1, g_2, \ldots, g_p)]$, where the $g_k$ are not all equal, of size $p$. (Why?)
+    \end{enumerate}
+    The number of equivalence classes of the first form must be divisible by $p$ (why?), and there is at least one class exists, namely $[(1, \ldots, 1)]$, so there must be another one, say $[(g, \ldots, g)]$, i.e. $g^p = 1$ for some $g \in G$.
+\end{proof}
+
+\begin{remark}
+    This is like a partial converse to Lagrange's theorem.
+\end{remark}
+
+\begin{exercise}
+    Think of an example where this theorem fails if $p$ is not prime.
+\end{exercise}
+
+\begin{lemma}
+    Let $p$ be a prime, and $\tau, \sigma \in S_p$ where $\tau$ is a 2-cycle and $\sigma$ a $p$-cycle. Then $S_p = \gen{\tau, \sigma}$.
+\end{lemma}
+
+\begin{proof}
+    By relabelling indices, we may assume $\tau = (12)$. By choosing $k$ such that $\sigma^k(1) = 2$ and then relabelling further indices, we may also assume $\sigma = (1234 \cdots p)$. Notice that since $\sigma^j \tau \sigma^{-j} = (j + 1 \; j + 2)$, we can obtain any simple transposition as a product from $\sigma$ and $\tau$. The set of all such transpositions generates $S_p$, so $S_p = \gen{\tau, \sigma}$.
+\end{proof}
+
+\subsection{Insolvable polynomials}
+
+\begin{proposition}
+    Let $f \in \bb{Q}[x]$ be an irreducible polynomial of prime degree $p$ with exactly 2 non-real roots. Then $\gal(f/\bb{Q}) \cong S_p$.
+\end{proposition}
+
+\begin{proof}
+    Let $K$ be the splitting field of $f$ over $\bb{Q}$. We can identify $G = \gal(K/\bb{Q})$ with a subgroup of $S_p$ (i.e. choose roots in some order $\alpha_1, \ldots, \alpha_p$). Notice that the complex conjugation map $\tau$ is in $G$, and $\tau$ is a 2-cycle since we assumed that $f$ has exactly 2 non-real roots. Let $\alpha$ be any of the roots of $f$. Then because $f$ is irreducible, we have $[\bb{Q}(\alpha) : \bb{Q}] = p$, so $[K : \bb{Q}]$ is divisible by $p$ by the tower law. So $|G| = [K : \bb{Q}]$ is also divisible by $p$, and Cauchy's theorem implies that $G$ contains an element $\sigma$ of order $p$, and in particular $\sigma$ must be a $p$-cycle. By the previous lemma, $G \cong S_p$.
+\end{proof}
+
+\begin{remark}
+    In particular, if $p \geq 5$, then $f$ is not solvable by radicals.
+\end{remark}
+
+\begin{exercise}~
+    \begin{enumerate}
+        \item Let us show that $f(x) = x^5 - 6x + 3$ is insolvable. It is certainly irreducible by Eisenstein's criterion. To see that it has two non-real roots, one considers the derivative
+        \[
+            f'(x) = 5x^4 - 6,
+        \]
+        and that the turning points are $x = \pm \sqrt[4]{6/5}$. The remaining calculus details here are left as an exercise, but now by the previous proposition, we now know $\gal(f/\bb{Q}) \cong S_5$, which is not solvable.
+        
+        \item For a non-example showing where this proposition fails if the degree is not prime, consider $f(x) = x^4 - 2x^2 - 1$. This is irreducible over $\bb{Q}$, and has exactly two non-real roots, but $G \cong D_8 \neq S_4$.
+    \end{enumerate}
+\end{exercise}
+
+\section{The discriminant of a polynomial}
+
+Let $f \in F[x]$ be of degree $n$, and $G = \gal(f/F) \subseteq S_n$. We now consider the intersection $N := G \cap A_n$, which is such that $N \unlhd G$. By the second isomorphism theorem,
+\[
+    \varphi: G/N \inclusion S_n/A_n \cong \zn{2},
+\]
+and $\varphi$ is an isomorphism if and only if $G \not\subseteq A_n$.
+
+Let us reflect for a moment on what it means for permutations to be odd or even. Consider the polynomial
+\[
+    \Delta(x_1, \ldots, x_n) = \prod_{k < j} (x_k - x_j) \in \bb{Z}[x_1, \ldots, x_n].
+\]
+Take any $\sigma \in S_n$. We have
+\[
+    (\sigma \Delta) = \Delta(x_{\sigma(1)}, \ldots, x_{\sigma(n)}) = \begin{cases}
+        \Delta & \text{if } \sigma \text{ is even}, \\
+        -\Delta & \text{if } \sigma \text{ is odd}.
+    \end{cases}
+\]
+One could consider this a definition for $\sigma$'s parity.
+
+\begin{proposition}
+    Suppose that $\fieldchar{F} \neq 2$, and $\alpha_1, \ldots, \alpha_n \in K$ are distinct roots of $f$ in a splitting field $K$ for $f$ over $F$. Then
+    \begin{enumerate}[label=(\alph*)]
+        \item $K^N = F(\delta)$ where $\delta := \prod_{k < j} (\alpha_k - \alpha_j)$.
+        \item $D := \delta^2 \in F$.
+        \item $G \subseteq A_n$ if and only if $D$ is already a square in $F$.
+    \end{enumerate}
+\end{proposition}
+
+\begin{proof}~
+    \begin{enumerate}[label=(\alph*)]
+        \item The reminder above implies that for any $\sigma \in G$, $\sigma(\delta) = \delta$ if $\sigma$ is even, or $\sigma(\delta) = -\delta$ if $\sigma$ is odd. That is, $\delta$ is in the fixed field $K^\sigma$ if and only if $\sigma \in N$, so $\gal(K/F(\delta)) = N$. The Galois correspondence therefore gives us the result.
+        \item To prove that $D \in F$, it is enough to prove that $\sigma(D) = D$ for all $\sigma \in G$. But
+        \[
+            \sigma(D) = \sigma(\delta)^2 = (\sigma(\delta))^2 = (\pm \delta)^2 = D.
+        \]
+        \item Exercise. \qedhere
+    \end{enumerate}
+\end{proof}
+
+\begin{definition}
+    We call the quantity $D$ above the \emph{discriminant} of $f$.
+\end{definition}
+
+This discriminant can also be expressed in terms of the coefficients of $f$.
+
+\begin{example}
+    In the case of a monic quadratic $f(x) = x^2 + bx + c$, we have
+    \[
+        D = (\alpha_1 - \alpha_2)^2 = \alpha_1^2 - 2\alpha_1 \alpha_2 + \alpha_2^2 = (\alpha_1 + \alpha_2)^2 - 4 \alpha_1 \alpha_2 = b^2 - 4c.
+    \]
+\end{example}
+
+\begin{example}
+    Consider the depressed cubic $f(x) = x^3 + px + q$. With some effort, one can show that $D = -27q^2 - 4p^3$. As a concrete example, if $p = q = 2$, then $D < 0$, so $D$ is not a square in $\bb{Q}$. This implies that $\gal(f/\bb{Q}) \cong S_3$. Considering now a non-depressed cubic $f(x) = x^3 + x^2 - 2x - 1$, we saw that if $\alpha$ was a root, then so is $\alpha^2 - 2$. So the splitting field is actually $\bb{Q}(\alpha)$. With calculation, one sees that $D = 49$, so in this case $\gal(f/\bb{Q}) \cong A_3$.
+\end{example}

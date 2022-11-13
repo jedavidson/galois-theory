@@ -1,0 +1,105 @@
+\chapter{Solvability by radicals}
+
+The goal of this chapter is to finally prove that general quintics are insoluble by radicals. Unless otherwise specified, all base fields are of characteristic zero.
+
+\section{Galois' criterion}
+
+The criteria for a radical extension to have solvable Galois group given in \cref{thm_gal_grp_solvable_strong_assns} made two quite strong assumptions. We will now show that these are not necessary, but also that this criteria applies to suitable non-radical extensions as well.
+
+\begin{lemma}[Removal of assumption 1]
+    If $K/F$ is radical and Galois, then $\gal(K/F)$ is solvable.
+\end{lemma}
+
+\begin{proof}
+    Assume we have the radical tower
+    \[
+        F = F_0 \subseteq F_1 \subseteq \cdots \subseteq F_n = K
+    \]
+    with $F_{k + 1} = F_k(\sqrt[\uproot{3} p_k]{\alpha_k})$ for some $\alpha_k \in F_k$ and $p_k$ prime. Because $K/F$ is Galois, $K$ is the splitting field for some $f \in F[x]$. Let $K_1$ be the splitting field of
+    \[
+        g(x) = \prod_{k = 1}^{n} (x^{p^k} - 1)
+    \]
+    over $K$, and let $E_1$ be the splitting field of $g$ over $F$.
+    % , giving a lattice of subfields
+    % \[
+    %     \begin{tikzcd}
+    %         & {K_1} \\
+    %         K && {E_1} \\
+    %         & F
+    %         \arrow["\subseteq"', no head, from=3-2, to=2-3]
+    %         \arrow["\supseteq"', no head, from=2-1, to=3-2]
+    %         \arrow["\subseteq", no head, from=2-1, to=1-2]
+    %         \arrow["\supseteq"', no head, from=2-3, to=1-2]
+    %     \end{tikzcd}
+    % \]
+    Since $K_1$ is also the splitting field of $fg$ over $F$, $K_1/F$ is Galois, and so too its upper subextension $K_1/E_1$. Also, since $K/F$ is radical, we have that $K_1/E_1$ is radical, as one may similarly construct a radical tower from $E_1$ to $F_1$ by successively adjoining the roots of $f$. By \cref{thm_gal_grp_solvable_strong_assns}, $\gal(K_1/E_1)$ is thus solvable. Note that by \cref{prop_addendum_fund_thm_of_gal_thy}, we have $\gal(K_1/E_1) \unlhd \gal(K_1/F)$, and the quotient
+    \[
+        \gal(E_1/F) \cong \frac{\gal(K_1/F)}{\gal(K_1/E_1)}.
+    \]
+    This quotient is abelian and hence solvable, so we see that $\gal(K_1/F)$ is also solvable by \cref{prop_solvability_of_subgroups_and_quots}. This implies that $\gal(K/F)$ is solvable, as it is (isomorphic to\footnote{More explicitly, each $F$-automorphism of $K$ extends to an $F$-automorphism of $K_1$ by acting as the identity on $K_1 \setminus K$, which preserves the group structure of $\gal(K/F)$ in $\gal(K_1/F)$.}) a subgroup of $\gal(K_1/F)$.
+\end{proof}
+
+\begin{exercise}
+    Fill in the details to properly justify why $\gal(E_1/F)$ is abelian. (Hint: let $m = p_1 p_2 \cdots p_n$, and use \cref{lem_char_0_gal_grp_monom} to deduce that the splitting field of $x^m - 1$ over $F$ has abelian Galois group.)
+\end{exercise}
+
+We can now prove the fully-relaxed and slightly more general theorem.
+
+\begin{theorem}
+\label{thm_gal_grp_solvable}
+    Let $K/F$ be a finite extension that embeds in a radical extension (i.e. $F \subseteq K \subseteq L$ where $L/F$ is radical). Then $\gal(K/F)$ is solvable.
+\end{theorem}
+
+\begin{proof}
+    Let $G = \gal(K/F)$ and $\widetilde{F} = K^G$. Then $K/\widetilde{F}$ is Galois, and $\gal(K/\widetilde{F}) = G$ by \cref{cor_subgroup_imp_of_fund_gal_thm}. Also $L$ is radical over $\widetilde{F}$, so it is enough to work with $K/\widetilde{F}$ and show that $\gal(K/\widetilde{F})$ is solvable. Next, let $\widetilde{L}$ be the Galois closure of $L/\widetilde{F}$. By \cref{prop_gal_closure_of_rad_ext} we know that $\widetilde{L}/\widetilde{F}$ is radical, and it is clearly Galois, so by the previous lemma, $\gal(\widetilde{L}/\widetilde{F})$ is solvable. But by \cref{prop_addendum_fund_thm_of_gal_thy}, $G$ is isomorphic to the quotient
+    \[
+        \gal(K/\widetilde{F}) \cong \frac{\gal(\widetilde{L}/\widetilde{F})}{\gal(\widetilde{L}/K)}
+    \]
+    of $\gal(\widetilde{L}/\widetilde{F})$, so by \cref{prop_solvability_of_subgroups_and_quots}, $G$ must be solvable.
+\end{proof}
+
+\begin{remark}
+    This theorem holds for $\fieldchar{F} > 0$ if $L/F$ is separable.
+\end{remark}
+
+\section{The general quintic is insoluble}
+
+Let $F$ be a field (not necessarily of characteristic zero), and suppose $f \in F[x]$.
+
+\begin{definition}
+    The \emph{Galois group of $f$ over $F$} is the Galois group of a splitting field $K$ for $f$ over $F$, i.e. $\gal(f/F) := \gal(K/F)$. We say that $f$ is \emph{solvable by radicals} over $F$ if $K/F$ embeds in a radical extension $L/F$.
+\end{definition}
+
+\begin{example}
+    $x^3 - 2$ is solvable by radicals over $\bb{Q}$, because its splitting field is $\bb{Q}(\sqrt[3]{2}, e^{2\pi i/3})$, which is radical over $\bb{Q}$. Moreover, $\gal(x^3 - 2/\bb{Q}) \cong S_3$.
+\end{example}
+
+For $n$ indeterminates $\alpha_k$, let $K = \bb{Q}(\alpha_1, \ldots, \alpha_n)$. Let $g \in K[x]$ be
+\begin{align*}
+    g(x)
+    &= (x - \alpha_1) \cdots (x - \alpha_n) \\
+    &= x^n - u_1 x^{n - 1} + u_2 x^{n - 2} - \ldots + (-1)^n u_n,
+\end{align*}
+where the coefficients $u_k$ are given by Vieta's formulae. Note that $K$ is the splitting field of $g$ over $F = \bb{Q}(u_1, u_2, \ldots, u_n)$. Also notice that $S_n$ permutes the roots $\alpha_k$, so it acts on $K$, and $\sigma g = g$ for all $\sigma \in S_n$ (as each $u_k$ is unchanged by permutation). This shows that each $u_k \in K^{S_n}$. With this setup, we can now state a result first originally proved by other means by Abel and Ruffini, but prove it using Galois theory:
+
+\begin{theorem}[Abel-Ruffini]
+\label{thm_abel_ruffini}
+    We have that
+    \begin{enumerate}[label=(\alph*)]
+        \item $F = K^{S_n}$, i.e. $\gal(g/F) = S_n$.
+        \item For $n \geq 5$, $g$ is not solvable by radicals over $\bb{Q}(u_1, \ldots, u_n)$.
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    It is obvious that $F \subseteq K^{S_n}$. For the other direction, we know that $K/K^{S_n}$ is Galois, which implies that
+    \[
+        [K : F] \geq [K : K^{S_n}] = |\gal(K/K^{S_n})| = |S_n| = n!.
+    \]
+    Also, $K$ is the splitting field of an $n$th degree polynomial, so $K/F$ is Galois and
+    \[
+        [K : F] = |\gal(K/F)| \leq |S_n| = n!,
+    \]    
+    since $\gal(K/F)$ embeds into $S_n$. This forces $K^{S_n} = F$. Now, we noted that $S_n$ is not solvable for $n \geq 5$, so (b) is a corollary of (a).
+\end{proof}
+    

@@ -64,7 +64,7 @@ We have seen that if $L \in \mathcal{F}$, then the ``upper extension" $K/L$ is G
     \[
         p_k(x) = \prod_{j} (x - \beta_j)
     \]
-    where each $\beta_j$ is an orbit of $\alpha_i$ under $G$. Since $\sigma(L) = L$, each $\beta_j \in L$. This shows that $L$ is the splitting field of $p = p_1 \cdots p_n$, and moreover that $p$ is separable, as each orbit is distinct.
+    where each $\beta_j$ is an orbit of $\alpha_k$ under $G$. Since $\sigma(L) = L$, each $\beta_j \in L$. This shows that $L$ is the splitting field of $p = p_1 \cdots p_n$, and moreover that $p$ is separable, as each orbit is distinct.
 \end{proof}
 
 We can now make an addendum to \cref{thm_fund_thm_of_gal_thy}.
@@ -83,7 +83,7 @@ We can now make an addendum to \cref{thm_fund_thm_of_gal_thy}.
 
 \begin{proof}~
     \begin{enumerate}[label=(\alph*)]
-        \item The $\Rightarrow$ direction follows from \cref{lem_cond_for_bottom_ext_gal} and \cref{cor_normal_subgrp_of_gal_grp_iff}. To show the $\Leftarrow$ direction, note that since $L/F$ is Galois, $L$ is the splitting field of some separable $f \in F[x]$. We can write $L = (\alpha_1, \ldots, \alpha_n)$, where the $\alpha_k$'s are the roots of $f$. Any $\sigma \in G$ permutes these roots, so in particular
+        \item The $\Rightarrow$ direction follows from \cref{lem_cond_for_bottom_ext_gal} and \cref{cor_normal_subgrp_of_gal_grp_iff}. To show the $\Leftarrow$ direction, note that since $L/F$ is Galois, $L$ is the splitting field of some separable $f \in F[x]$. We can write $L = F(\alpha_1, \ldots, \alpha_n)$, where the $\alpha_k$'s are the roots of $f$. Any $\sigma \in G$ permutes these roots, so in particular
         \[
             \sigma(L) = F(\sigma(\alpha_1), \ldots, \sigma(\alpha_n)) = L,
         \]

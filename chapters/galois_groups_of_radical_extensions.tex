@@ -83,12 +83,20 @@ In the situations where it is applicable, this will give us a powerful tool for 
     The fact that $G_k \unlhd G_{k + 1}$ does not necessarily imply $G_k \unlhd G$. For example, if $G = D_8 = \gen{\tau, \sigma}$, then $\gen{\tau} \unlhd \gen{\tau, \sigma^2}$, but $\gen{\tau} \ntrianglelefteq D_8$.
 \end{remark}
 
+In the context of Galois theory, we want to know when Galois groups are solvable. We now give a criteria for Galois groups of radical extensions.
+
 \begin{theorem}
+\label{thm_gal_grp_solvable_strong_assns}
     Consider a radical tower
     \[
         F = F_0 \subseteq F_1 \subseteq \cdots \subseteq F_n = K
     \]
-    with $F_{k + 1} = F_k(\sqrt[\uproot{3} p_k]{\alpha_k})$ for some $\alpha_k \in F_k$ and $p_k$ prime. Suppose each polynomial $x^{p_k} - 1$ splits in $F[x]$ and that $K/F$ is Galois. Then $G = \gal(K/F)$ is solvable.
+    with $F_{k + 1} = F_k(\sqrt[\uproot{3} p_k]{\alpha_k})$ for some $\alpha_k \in F_k$ and $p_k$ prime. Moreover, assume that
+    \begin{enumerate}
+        \item each polynomial $x^{p_k} - 1$ splits in $F[x]$, and
+        \item $K/F$ is Galois.
+    \end{enumerate}
+    Then $G = \gal(K/F)$ is solvable.
 \end{theorem}
 
 \begin{proof}
@@ -102,6 +110,10 @@ In the situations where it is applicable, this will give us a powerful tool for 
     \]
     By \cref{prop_gal_grp_isom_for_root_of_unity_field}\footnote{with $p = p_k$, $F = F_k$ and $\alpha = \alpha_k$}, each of these factors is either isomorphic to $\zn{p_k}$ or trivial, so the required chain is in fact ($*$).
 \end{proof}
+
+\begin{remark}
+    This theorem requires two strong assumptions for now, but we will later show that they may both be dropped!
+\end{remark}
 
 \begin{example}
     Consider the biquadratic extension

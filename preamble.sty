@@ -1,24 +1,20 @@
 \usepackage[margin=1.5in]{geometry}
 
-\usepackage{mathpazo} % Use a slightly different font
-\usepackage[euler-digits,euler-hat-accent]{eulervm} % Use Euler script in math mode
-\usepackage{enumitem} % Change labels for enumerate environments
-\usepackage[dvipsnames]{xcolor} % Improved colour choices
-\usepackage{chngcntr} % Reset counters
-\usepackage{amsmath} % Basic math package
-\usepackage{amssymb} % Basic math package
-\usepackage{mathtools} % Basic math package
-\usepackage{amsthm} % Theorem, definition etc. environments
-\usepackage[new]{old-arrows} % More math mode arrows
-\usepackage{tcolorbox} % Shaded boxes
-\usepackage{tikz-cd} % Commutative diagrams
-\usepackage{caption} % Better captions
-\usepackage{bm} % Italic bold-face vectors
-\usepackage[scr=boondoxo]{mathalpha} % Math script fontface
-% \usepackage{parskip} % Paragraph spacing control
-
-% \setlength{\parskip}{6pt}
-% \setlength{\parindent}{12pt}
+\usepackage{mathpazo}
+\usepackage[euler-digits,euler-hat-accent]{eulervm}
+\usepackage{enumitem}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{chngcntr}
+\usepackage{caption}
+\usepackage[hang,flushmargin]{footmisc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{amsthm}
+\usepackage[new]{old-arrows}
+\usepackage{tcolorbox}
+\usepackage{tikz-cd}
+\usepackage{bm}
 
 % Use subsection labels for figures
 \counterwithin{figure}{section}
@@ -45,9 +41,9 @@
 \colorlet{shadedblockcolor}{purple!75!black}
 \tcbset{base/.style={empty, frame engine=path, sharp corners}}
 \newtcolorbox{shadedblock}{
-  base,
-  colframe=purple!10,
-  borderline west={2pt}{-2pt}{shadedblockcolor}
+    base,
+    colframe=purple!10,
+    borderline west={2pt}{-2pt}{shadedblockcolor}
 }
 
 % References
