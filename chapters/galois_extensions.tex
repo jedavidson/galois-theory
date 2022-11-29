@@ -125,6 +125,28 @@ The property that the first extension lacks in \cref{exmp_non_gal_exts} is \emph
     This definition is technically wrong for infinite extensions, but in this course we will deal primarily in finite extensions (for which it is valid).
 \end{remark}
 
+Here is an equivalent definition for normality that appears in some texts. Again, we assume finiteness so that our first definition works.
+
+\begin{proposition}
+\label{prop_normal_ext_min_polys_split}
+    If $K/F$ is normal, then the minimal polynomial over $F$ of any element in $K$ splits in $K$.
+\end{proposition}
+
+\begin{proof}
+    Since $K$ is the splitting field of some $f \in F[x]$, write $K = F(\alpha_1, \ldots, \alpha_n)$ where the $\alpha_k$'s are the roots of $f$. Pick any $\alpha \in K$. If $\alpha$ is already in $F$, then its minimal polynomial trivially splits in $K$, so assume that $\alpha \not\in F$. Its minimal polynomial $g \in F[x]$ must therefore be of degree at least 2. Let $\beta$ be some other root of $g$ in a suitable splitting field.
+    % Let $L$ be a splitting field for $g$ over $K$, and let $\beta \in L$ be any other root of $g$.
+    % Consider $fg$ as a polynomial over $K$, and let $L$ be its splitting field over $K$. Then $g$ splits in $L$ too, so let $\beta \in L$ be any other root of $g$.
+    By \cref{prop_field_isom_lifts_to_root_isom}, there is a field isomorphism $\sigma: F(\alpha) \to F(\beta)$ with $\sigma = \id$ on $F$ and $\sigma(\alpha) = \beta$. Note that $f$ splits in $K$ over $F(\alpha)$, and $\sigma f = f$ splits in $K(\beta)$ over $F(\beta)$, so \cref{prop_field_isom_ext_to_spl_field_isom} allows for an extension of $\sigma$ to an isomorphism $\widetilde{\sigma}: K \to K(\beta)$. It follows from the proof of this proposition that $\widetilde{\sigma} = \sigma$ on $F(\alpha)$, and we know that $\sigma = \id$ on $F$, so in particular $\widetilde{\sigma}f = f$. Now for each root $\alpha_k$ of $f$, we have
+    \[
+        f(\widetilde{\sigma}(\alpha_k)) = (\widetilde{\sigma} f)(\alpha_k) = f(\alpha_k) = 0,
+    \]
+    so $\widetilde{\sigma}(\alpha_k) \in K$ for each $k$, and hence $\widetilde{\sigma}(\alpha) \in K$. But $\beta = \sigma(\alpha) = \widetilde{\sigma}(\alpha)$, and since $\beta$ was an arbitrarily-chosen root of $g$, this shows that $g$ splits in $K$.
+\end{proof}
+
+\begin{exercise}
+    Complete the proof of equivalence of these normality definitions by showing that the converse of \cref{prop_normal_ext_min_polys_split} also holds.
+\end{exercise}
+
 \begin{definition}
     A normal field extension $K/F$ is \emph{Galois} if, in particular, it is the splitting field of some separable polynomial over $F$.
 \end{definition}
