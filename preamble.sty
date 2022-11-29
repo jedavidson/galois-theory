@@ -1,7 +1,7 @@
 \usepackage[margin=1.5in]{geometry}
 
-\usepackage{mathpazo}
-\usepackage[euler-digits,euler-hat-accent]{eulervm}
+% \usepackage{mathpazo}
+% \usepackage[euler-digits,euler-hat-accent]{eulervm}
 \usepackage{enumitem}
 \usepackage[dvipsnames]{xcolor}
 \usepackage{chngcntr}
@@ -16,15 +16,14 @@
 \usepackage{tikz-cd}
 \usepackage{bm}
 
-% Use subsection labels for figures
+\colorlet{themecolour}{purple}
+
 \counterwithin{figure}{section}
 
-% Section formats
-\renewcommand*{\sectionformat}{\color{purple}\S\thesection\autodot\enskip}
-\renewcommand*{\subsectionformat}{\color{purple}\S\thesubsection\autodot\enskip}
-\renewcommand*{\chapterformat}{\color{purple}\S\thechapter\autodot\enskip}
+\renewcommand*{\chapterformat}{\color{themecolour}\S\thechapter\autodot\enskip}
+\renewcommand*{\sectionformat}{\color{themecolour}\S\thesection\autodot\enskip}
+\renewcommand*{\subsectionformat}{\color{themecolour}\S\thesubsection\autodot\enskip}
 
-% amsthm setup
 \theoremstyle{definition}
 \newtheorem{theorem}{Theorem}[section]
 \newtheorem{proposition}{Proposition}[section]
@@ -35,19 +34,8 @@
 \newtheorem{remark}{Remark}[section]
 \newtheorem{exercise}{Exercise}[section]
 
-% Boxes
-\tcbuselibrary{skins}
-\usetikzlibrary{shadings}
-\colorlet{shadedblockcolor}{purple!75!black}
-\tcbset{base/.style={empty, frame engine=path, sharp corners}}
-\newtcolorbox{shadedblock}{
-    base,
-    colframe=purple!10,
-    borderline west={2pt}{-2pt}{shadedblockcolor}
-}
-
 % References
 \usepackage[colorlinks]{hyperref}
-\hypersetup{linkcolor=purple}
+\hypersetup{linkcolor=themecolour}
 \usepackage[capitalize,nameinlink]{cleveref}
-\renewcommand\thefootnote{\textcolor{purple}{\arabic{footnote}}}
+\renewcommand\thefootnote{\textcolor{themecolour}{\arabic{footnote}}}

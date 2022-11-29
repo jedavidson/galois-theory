@@ -1,3 +1,14 @@
+% Shaded blocks
+\tcbuselibrary{skins}
+\usetikzlibrary{shadings}
+\colorlet{shadedblockcolor}{themecolour!75!black}
+\tcbset{base/.style={empty, frame engine=path, sharp corners}}
+\newtcolorbox{block}{
+    base,
+    colframe=themecolour!10,
+    borderline west={3pt}{0pt}{themecolour}
+}
+
 % Blackboard font
 \newcommand{\bb}[1]{\mathbb{{#1}}}
 
